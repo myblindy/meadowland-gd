@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameItemResource" load_steps=3 format=3 uid="uid://svpq80lssfpt"]
+
+[ext_resource type="Texture2D" uid="uid://q0ydsuqmmy07" path="res://textures/items/bed.png" id="1_b2u7q"]
+[ext_resource type="Script" uid="uid://dsrutk0n2h146" path="res://resources/game_item_resource.gd" id="1_hdaei"]
+
+[resource]
+script = ExtResource("1_hdaei")
+name = "Bed"
+icon_texture = ExtResource("1_b2u7q")
+weight = 15.0
+pickup_speed_multiplier = 5.0
+placeable = true
+metadata/_custom_type_script = "uid://dsrutk0n2h146"
