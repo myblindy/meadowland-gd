@@ -9,6 +9,6 @@ func _ready() -> void:
 
 		var button := Button.new()
 		button.text = building_resource.name
-		button.icon = building_resource.types[0].icon_texture
+		button.icon = building_resource.cost_types[0].icon_texture
 		button.tooltip_text = "Builds a {}".format([building_resource.name], "{}")
 		add_child(button)

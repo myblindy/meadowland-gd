@@ -4,17 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://d3n78kctrg05d" path="res://textures/gui/buttonLong_brown.png" id="1_vu6l5"]
 [ext_resource type="Texture2D" uid="uid://cxwjcru8bfhxu" path="res://textures/gui/buttonLong_brown_pressed.png" id="2_ydht1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vu6l5"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ceur"]
+texture = ExtResource("1_vu6l5")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+modulate_color = Color(0.2, 0.2, 0.2, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ydht1"]
 
@@ -65,7 +63,7 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 32
 Button/constants/outline_size = 5
 Button/font_sizes/font_size = 20
-Button/styles/disabled = SubResource("StyleBoxFlat_vu6l5")
+Button/styles/disabled = SubResource("StyleBoxTexture_7ceur")
 Button/styles/focus = SubResource("StyleBoxEmpty_ydht1")
 Button/styles/hover = SubResource("StyleBoxTexture_g21io")
 Button/styles/normal = SubResource("StyleBoxTexture_ydht1")
