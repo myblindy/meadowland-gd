@@ -31,7 +31,6 @@ public partial class MapGenerationServer : GodotObject
                 + (string.IsNullOrWhiteSpace(biome.Get("tileset").AsString()) ? biome.Get("name").AsString() : biome.Get("tileset").AsString()) 
                     .Replace(' ', '_')
                 + "/";
-            GD.Print($"Loading tileset from {tilesetPath} for biome {biome.Get("name").AsString()}");
             var tilesetTextures = DirAccess.GetFilesAt(tilesetPath)
                 .Where(textureFile => textureFile.EndsWith(".png"))
                 .Select(textureFile => GD.Load<Texture2D>(tilesetPath + textureFile))
