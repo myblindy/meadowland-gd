@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://djnlq3sycmwth"]
+
+[ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_1cvva"]
+
+[resource]
+script = ExtResource("1_1cvva")
+name = "Deep Water"
+movement_modifier = 0.0
+min_height = 0.0
+min_moisture = 0.0
+min_heat = 0.0
+metadata/_custom_type_script = "uid://op5i02bjrc1y"

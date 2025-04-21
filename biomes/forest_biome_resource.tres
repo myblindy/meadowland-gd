@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://d1md1dvc0sxma"]
+
+[ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_ejl7e"]
+
+[resource]
+script = ExtResource("1_ejl7e")
+name = "Forest"
+tileset = "grass"
+movement_modifier = 0.9
+min_height = 0.25
+min_moisture = 0.3
+min_heat = 0.2
+metadata/_custom_type_script = "uid://op5i02bjrc1y"

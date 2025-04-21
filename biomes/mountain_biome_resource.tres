@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://c62kqokd4pidd"]
+
+[ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_srn20"]
+
+[resource]
+script = ExtResource("1_srn20")
+name = "Mountain"
+movement_modifier = 0.3
+min_height = 0.7
+min_moisture = 0.0
+min_heat = 0.0
+metadata/_custom_type_script = "uid://op5i02bjrc1y"
