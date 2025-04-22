@@ -5,9 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{829FAFDE-74F7-4AF8-91E5-44262AFBD53E}|meadowland-gd.csproj|e:\\gitrepos\\meadowland-gd\\servers\\mapgenerationserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{829FAFDE-74F7-4AF8-91E5-44262AFBD53E}|meadowland-gd.csproj|solutionrelative:servers\\mapgenerationserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tweet\\AppData\\Local\\SourceServer\\d31b16aea6f9409af02392f7cc2e961beae524af533cb7d17078bcd2f09e9136\\src\\coreclr\\System.Private.CoreLib\\src\\System\\Diagnostics\\Debugger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 309,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,26 +34,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Debugger.cs",
-              "DocumentMoniker": "C:\\Users\\tweet\\AppData\\Local\\SourceServer\\d31b16aea6f9409af02392f7cc2e961beae524af533cb7d17078bcd2f09e9136\\src\\coreclr\\System.Private.CoreLib\\src\\System\\Diagnostics\\Debugger.cs",
-              "ToolTip": "C:\\Users\\tweet\\AppData\\Local\\SourceServer\\d31b16aea6f9409af02392f7cc2e961beae524af533cb7d17078bcd2f09e9136\\src\\coreclr\\System.Private.CoreLib\\src\\System\\Diagnostics\\Debugger.cs [Read Only]",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAtwBkAAAAnAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-21T22:18:57.193Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MapGenerationServer.cs",
               "DocumentMoniker": "E:\\gitrepos\\meadowland-gd\\servers\\MapGenerationServer.cs",
               "RelativeDocumentMoniker": "servers\\MapGenerationServer.cs",
               "ToolTip": "E:\\gitrepos\\meadowland-gd\\servers\\MapGenerationServer.cs",
               "RelativeToolTip": "servers\\MapGenerationServer.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAADwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-21T21:47:46.692Z",
+              "WhenOpened": "2025-04-22T20:30:07.536Z",
               "EditorCaption": ""
             }
           ]
