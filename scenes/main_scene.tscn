@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://6j8fy1frgkdh"]
+[gd_scene load_steps=4 format=3 uid="uid://6j8fy1frgkdh"]
 
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main_scene_build_panel.gd" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://domuhsksyf45b" path="res://scenes/camera.gd" id="3_7ykc4"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_pw63i")
@@ -27,3 +28,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2twt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_7ykc4")
