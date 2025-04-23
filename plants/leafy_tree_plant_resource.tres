@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GamePlantResource" load_steps=6 format=3 uid="uid://ctj3w8g4y0n4i"]
+
+[ext_resource type="Script" uid="uid://16rvp5xx1kty" path="res://resources/game_resource_quantity_resource.gd" id="1_ymvj4"]
+[ext_resource type="Script" uid="uid://bg8duyxyp6xfs" path="res://resources/game_plant_resource.gd" id="2_7oi80"]
+[ext_resource type="Resource" uid="uid://d16v63tmyw83f" path="res://items/wood_item_resource.tres" id="2_lu7ji"]
+[ext_resource type="Texture2D" uid="uid://v7bltowftesu" path="res://textures/plants/tree-leafy.png" id="4_b3yae"]
+
+[sub_resource type="Resource" id="Resource_wiv04"]
+script = ExtResource("1_ymvj4")
+resource = ExtResource("2_lu7ji")
+quantity = 25.0
+metadata/_custom_type_script = "uid://16rvp5xx1kty"
+
+[resource]
+script = ExtResource("2_7oi80")
+name = "Leafy Tree"
+sprite_texture = ExtResource("4_b3yae")
+containing_resources = Array[ExtResource("1_ymvj4")]([SubResource("Resource_wiv04")])
+harvest_work_ticks = 35
+days_from_spawn_to_full_growth = 8
+metadata/_custom_type_script = "uid://bg8duyxyp6xfs"
