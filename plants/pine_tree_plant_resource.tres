@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://16rvp5xx1kty" path="res://resources/game_resource_quantity_resource.gd" id="1_d83je"]
 [ext_resource type="Resource" uid="uid://d16v63tmyw83f" path="res://items/wood_item_resource.tres" id="2_x8v7a"]
 [ext_resource type="Script" uid="uid://bg8duyxyp6xfs" path="res://resources/game_plant_resource.gd" id="3_6fi0x"]
-[ext_resource type="Texture2D" uid="uid://dklbqfhvb8v8e" path="res://textures/plants/tree-pine.png" id="4_d83je"]
+[ext_resource type="Texture2D" uid="uid://dklbqfhvb8v8e" path="res://plants/pine_tree_plant.png" id="4_d83je"]
 
 [sub_resource type="Resource" id="Resource_wiv04"]
 script = ExtResource("1_d83je")

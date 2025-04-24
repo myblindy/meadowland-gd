@@ -1,6 +1,21 @@
-[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://benuld16b5nfx"]
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=7 format=3 uid="uid://benuld16b5nfx"]
 
+[ext_resource type="Script" uid="uid://be7fg6nnau3qt" path="res://resources/game_biome_plant_chance_resource.gd" id="1_j8jdv"]
 [ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_xewpb"]
+[ext_resource type="Resource" uid="uid://ctj3w8g4y0n4i" path="res://plants/leafy_tree_plant_resource.tres" id="2_otcmb"]
+[ext_resource type="Resource" uid="uid://dwhsniydeuar6" path="res://plants/pine_tree_plant_resource.tres" id="3_j8a5h"]
+
+[sub_resource type="Resource" id="Resource_nuxsq"]
+script = ExtResource("1_j8jdv")
+plant = ExtResource("2_otcmb")
+chance_percentage = 0.5
+metadata/_custom_type_script = "uid://be7fg6nnau3qt"
+
+[sub_resource type="Resource" id="Resource_v7jq2"]
+script = ExtResource("1_j8jdv")
+plant = ExtResource("3_j8a5h")
+chance_percentage = 0.3
+metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 
 [resource]
 script = ExtResource("1_xewpb")
@@ -10,4 +25,5 @@ movement_modifier = 0.8
 min_height = 0.25
 min_moisture = 0.4
 min_heat = 0.3
+plants = Array[ExtResource("1_j8jdv")]([SubResource("Resource_nuxsq"), SubResource("Resource_v7jq2")])
 metadata/_custom_type_script = "uid://op5i02bjrc1y"

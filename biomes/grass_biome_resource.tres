@@ -1,12 +1,22 @@
-[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://coqgrobscgwf5"]
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=5 format=3 uid="uid://coqgrobscgwf5"]
 
 [ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_5ak4a"]
+[ext_resource type="Script" uid="uid://be7fg6nnau3qt" path="res://resources/game_biome_plant_chance_resource.gd" id="1_g6ura"]
+[ext_resource type="Resource" uid="uid://ctj3w8g4y0n4i" path="res://plants/leafy_tree_plant_resource.tres" id="2_ck8ah"]
+
+[sub_resource type="Resource" id="Resource_j5pc2"]
+script = ExtResource("1_g6ura")
+plant = ExtResource("2_ck8ah")
+chance_percentage = 0.1
+metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 
 [resource]
 script = ExtResource("1_5ak4a")
 name = "Grass"
+tileset = ""
 movement_modifier = 1.0
 min_height = 0.25
 min_moisture = 0.2
 min_heat = 0.1
+plants = Array[ExtResource("1_g6ura")]([SubResource("Resource_j5pc2")])
 metadata/_custom_type_script = "uid://op5i02bjrc1y"

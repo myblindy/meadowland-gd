@@ -9,6 +9,8 @@ script = ExtResource("1_pw63i")
 
 [node name="TileMapGroundLayer" type="TileMapLayer" parent="."]
 
+[node name="TileMapPlantLayer" type="TileMapLayer" parent="."]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_7ykc4")
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dklbqfhvb8v8e"
-path="res://.godot/imported/tree-pine.png-4cb7139b22266ea0689120da1bda209d.ctex"
+uid="uid://v7bltowftesu"
+path="res://.godot/imported/leafy_tree_plant.png-ec1e24ff9cdab9965a1058eb0e6b12e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/plants/tree-pine.png"
-dest_files=["res://.godot/imported/tree-pine.png-4cb7139b22266ea0689120da1bda209d.ctex"]
+source_file="res://plants/leafy_tree_plant.png"
+dest_files=["res://.godot/imported/leafy_tree_plant.png-ec1e24ff9cdab9965a1058eb0e6b12e3.ctex"]
 
 [params]
 

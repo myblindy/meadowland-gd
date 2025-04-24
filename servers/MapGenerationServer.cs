@@ -7,6 +7,8 @@ using Godot;
 [GlobalClass]
 public partial class MapGenerationServer : GodotObject
 {
+    readonly record struct Plant(string Name, Texture2D spriteTexture);
+
     readonly record struct Biome(string Name, bool Passable, double Height, double Moisture, double Heat, Texture2D[] Textures)
     {
         public bool Matches(double height, double moisture, double heat) =>
@@ -17,11 +19,30 @@ public partial class MapGenerationServer : GodotObject
     }
 
     static readonly Biome[] biomes;
-    static readonly Dictionary<Texture2D, Vector2I> tileIds = [];
-    static int tileSourceId;
+    static readonly Plant[] plants;
+    static readonly Dictionary<Texture2D, Vector2I> terrainTileIds = [];
+    static int terrainTileSourceId;
     static readonly Vector2I tileSize;
     static MapGenerationServer()
     {
+        // plants
+        const string plantPath = "res://plants/";
+        var plantFiles = DirAccess.GetFilesAt(plantPath)
+            .Where(file => file.EndsWith(".tres"))
+            .ToArray();
+        plants = new Plant[plantFiles.Length];
+
+        int plantIndex = 0;
+        foreach(var plantFile in plantFiles)
+        {
+            var plant = GD.Load<Resource>(plantPath + plantFile);
+            plants[plantIndex++] = new Plant(
+                plant.Get("name").AsString(),
+                plant.Get("sprite").As<Texture2D>());
+        }
+        GD.Print($"Loaded {plantFiles.Length} plants");
+
+        // biomes
         const string biomePath = "res://biomes/";
         var biomeFiles = DirAccess.GetFilesAt(biomePath);
         biomes = new Biome[biomeFiles.Length];
@@ -49,7 +70,6 @@ public partial class MapGenerationServer : GodotObject
                 biome.Get("min_heat").AsSingle(),
                 tilesetTextures);
         }
-
         GD.Print($"Loaded {biomeFiles.Length} biomes");
     }
 
@@ -76,7 +96,7 @@ public partial class MapGenerationServer : GodotObject
         {
             image.BlitRect(texture.GetImage(), new(0, 0, texture.GetWidth(), texture.GetHeight()), new(x, y));
 
-            tilePositions.Add(tileIds[texture] = new(tileX, tileY));
+            tilePositions.Add(terrainTileIds[texture] = new(tileX, tileY));
 
             if (x + 2 * (tileSize.X + 1) >= image.GetWidth())
             {
@@ -96,7 +116,7 @@ public partial class MapGenerationServer : GodotObject
         layer.TileSet = new TileSet() { UVClipping = true };
         layer.TileSet.TileSize = tileSize;
         layer.TileSet.AddSource(atlas);
-        tileSourceId = layer.TileSet.GetSourceId(0);
+        terrainTileSourceId = layer.TileSet.GetSourceId(0);
 
 #if DEBUG
         GD.Print($"Map tileset generation complete in {stopwatch.Elapsed.TotalSeconds}s");
@@ -138,7 +158,7 @@ public partial class MapGenerationServer : GodotObject
                         }
 
                     var cellTexture = biomes[bestBiomeIndex].Textures[GD.Randi() % biomes[bestBiomeIndex].Textures.Length];
-                    layer.SetCell(new(x, y), tileSourceId, tileIds[cellTexture]);
+                    layer.SetCell(new(x, y), terrainTileSourceId, terrainTileIds[cellTexture]);
                     cells[x, y] = biomes[bestBiomeIndex];
                 }
 
