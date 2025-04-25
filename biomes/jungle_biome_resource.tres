@@ -19,11 +19,11 @@ metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 
 [resource]
 script = ExtResource("1_xewpb")
-name = "Forest"
+name = "Jungle"
 tileset = "grass"
 movement_modifier = 0.8
 min_height = 0.25
-min_moisture = 0.4
-min_heat = 0.3
+min_moisture = 0.8
+min_heat = 0.6
 plants = Array[ExtResource("1_j8jdv")]([SubResource("Resource_nuxsq"), SubResource("Resource_v7jq2")])
 metadata/_custom_type_script = "uid://op5i02bjrc1y"

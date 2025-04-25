@@ -7,22 +7,25 @@ using Godot;
 [GlobalClass]
 public partial class MapGenerationServer : GodotObject
 {
-    readonly record struct Plant(string Name, Texture2D spriteTexture);
+    readonly record struct Plant(string Name, Texture2D SpriteTexture);
 
-    readonly record struct Biome(string Name, bool Passable, double Height, double Moisture, double Heat, Texture2D[] Textures)
+    readonly record struct PlantSpawnChance(Plant Plant, float ChancePercentage);
+    readonly record struct Biome(string Name, bool Passable,
+        double Height, double Moisture, double Heat, Texture2D[] Textures,
+        PlantSpawnChance[] PlantSpawnChances)
     {
         public bool Matches(double height, double moisture, double heat) =>
             height >= Height && moisture >= Moisture && heat >= Heat;
 
         public double GetDifferenceFromPoint(double height, double moisture, double heat) =>
-            (height - Height) + (moisture - Moisture) + (Heat - heat);
+            (height - Height) + (moisture - Moisture) + (heat - Heat);
     }
 
     static readonly Biome[] biomes;
     static readonly Plant[] plants;
-    static readonly Dictionary<Texture2D, Vector2I> terrainTileIds = [];
-    static int terrainTileSourceId;
-    static readonly Vector2I tileSize;
+    static readonly Dictionary<Texture2D, Vector2I> groundTileIds = [], plantTileIds = [];
+    static int groundTileSourceId, plantTileSourceId;
+    static readonly Vector2I tileSize = new(32, 32);
     static MapGenerationServer()
     {
         // plants
@@ -33,12 +36,12 @@ public partial class MapGenerationServer : GodotObject
         plants = new Plant[plantFiles.Length];
 
         int plantIndex = 0;
-        foreach(var plantFile in plantFiles)
+        foreach (var plantFile in plantFiles)
         {
             var plant = GD.Load<Resource>(plantPath + plantFile);
             plants[plantIndex++] = new Plant(
                 plant.Get("name").AsString(),
-                plant.Get("sprite").As<Texture2D>());
+                plant.Get("sprite_texture").As<Texture2D>());
         }
         GD.Print($"Loaded {plantFiles.Length} plants");
 
@@ -60,7 +63,23 @@ public partial class MapGenerationServer : GodotObject
                 .Where(textureFile => textureFile.EndsWith(".png"))
                 .Select(textureFile => GD.Load<Texture2D>(tilesetPath + textureFile))
                 .ToArray();
-            tileSize = new((int)tilesetTextures[0].GetSize().X, (int)tilesetTextures[0].GetSize().Y);
+
+            var plantSpawnChances = biome.Get("plants").AsGodotArray()
+                .Select(plantSpawnChance => plantSpawnChance.As<Resource>())
+                .Select(plantSpawnChance =>
+                {
+                    var plantName = plantSpawnChance.Get("plant").As<Resource>().Get("name").AsString();
+                    return new PlantSpawnChance(
+                        plants.Single(p => p.Name == plantName),
+                        plantSpawnChance.Get("chance_percentage").AsSingle());
+                })
+                .ToArray();
+            if (plantSpawnChances.Sum(w => w.ChancePercentage) is { } totalChancePercentage && totalChancePercentage > 1)
+            {
+                // normalize the chances
+                plantSpawnChances = [.. plantSpawnChances.Select(w =>
+                    new PlantSpawnChance(w.Plant, w.ChancePercentage / totalChancePercentage))];
+            }
 
             biomes[biomeIndex++] = new Biome(
                 biome.Get("name").AsString(),
@@ -68,14 +87,14 @@ public partial class MapGenerationServer : GodotObject
                 biome.Get("min_height").AsSingle(),
                 biome.Get("min_moisture").AsSingle(),
                 biome.Get("min_heat").AsSingle(),
-                tilesetTextures);
+                tilesetTextures, plantSpawnChances);
         }
         GD.Print($"Loaded {biomeFiles.Length} biomes");
     }
 
     public Vector2I TileSize => tileSize;
 
-    public void InitializeTileSet(TileMapLayer layer)
+    public void InitializeGroundTileSet(TileMapLayer groundLayer)
     {
 #if DEBUG
         var stopwatch = Stopwatch.StartNew();
@@ -94,9 +113,9 @@ public partial class MapGenerationServer : GodotObject
         List<Vector2I> tilePositions = [];
         foreach (var texture in biomes.SelectMany(b => b.Textures))
         {
-            image.BlitRect(texture.GetImage(), new(0, 0, texture.GetWidth(), texture.GetHeight()), new(x, y));
+            BlitRectHelper(image, texture.GetImage(), new(0, 0, texture.GetWidth(), texture.GetHeight()), new(x, y));
 
-            tilePositions.Add(terrainTileIds[texture] = new(tileX, tileY));
+            tilePositions.Add(groundTileIds[texture] = new(tileX, tileY));
 
             if (x + 2 * (tileSize.X + 1) >= image.GetWidth())
             {
@@ -113,18 +132,90 @@ public partial class MapGenerationServer : GodotObject
         foreach (var tilePosition in tilePositions)
             atlas.CreateTile(tilePosition);
 
-        layer.TileSet = new TileSet() { UVClipping = true };
-        layer.TileSet.TileSize = tileSize;
-        layer.TileSet.AddSource(atlas);
-        terrainTileSourceId = layer.TileSet.GetSourceId(0);
+        groundLayer.TileSet = new TileSet() { UVClipping = true };
+        groundLayer.TileSet.TileSize = tileSize;
+        groundLayer.TileSet.AddSource(atlas);
+        groundTileSourceId = groundLayer.TileSet.GetSourceId(0);
 
 #if DEBUG
         GD.Print($"Map tileset generation complete in {stopwatch.Elapsed.TotalSeconds}s");
 #endif
     }
 
+    public void InitializePlantTileSet(TileMapLayer plantLayer)
+    {
+#if DEBUG
+        var stopwatch = Stopwatch.StartNew();
+#endif
+
+        // create one image with all the tile textures
+        var atlas = new TileSetAtlasSource
+        {
+            TextureRegionSize = tileSize,
+            Margins = default,
+            Separation = new(1, 1),
+            UseTexturePadding = false,
+        };
+        var image = Image.CreateEmpty(512, 512, true, Image.Format.Rgba8);   // TODO: figure out the size from the textures
+        int x = 0, y = 0, tileX = 0, tileY = 0;
+        List<Vector2I> tilePositions = [];
+        foreach (var texture in plants.Select(b => b.SpriteTexture))
+        {
+            BlitRectHelper(image, texture.GetImage(), new(0, 0, texture.GetWidth(), texture.GetHeight()), new(x, y));
+
+            tilePositions.Add(plantTileIds[texture] = new(tileX, tileY));
+
+            if (x + 2 * (tileSize.X + 1) >= image.GetWidth())
+            {
+                x = 0; tileX = 0;
+                y += tileSize.Y + 1; ++tileY;
+            }
+            else
+            {
+                x += tileSize.X + 1; ++tileX;
+            }
+        }
+
+        atlas.Texture = ImageTexture.CreateFromImage(image);
+        foreach (var tilePosition in tilePositions)
+            atlas.CreateTile(tilePosition);
+
+        plantLayer.TileSet = new TileSet() { UVClipping = true };
+        plantLayer.TileSet.TileSize = tileSize;
+        plantLayer.TileSet.AddSource(atlas);
+        plantTileSourceId = plantLayer.TileSet.GetSourceId(0);
+
+#if DEBUG
+        GD.Print($"Map tileset generation complete in {stopwatch.Elapsed.TotalSeconds}s");
+#endif
+    }
+
+    static void BlitRectHelper(Image destinationImage, Image sourceImage, Rect2I sourceRect, Vector2I destinationPosition)
+    {
+        if (sourceImage.GetFormat() != destinationImage.GetFormat())
+        {
+            // convert the image to the destination format
+            sourceImage.Convert(destinationImage.GetFormat());
+        }
+
+        if(sourceRect.Size != tileSize)
+        {
+            // crop?
+            if(sourceRect.Position != default || sourceRect.Size!=sourceImage.GetSize())
+            {
+                sourceImage.BlitRect(sourceImage, new(0,0, sourceImage.GetWidth(), sourceImage.GetHeight()), default);
+                sourceImage.Crop(sourceImage.GetWidth(), sourceImage.GetHeight());
+            }
+
+            // resize the image
+            sourceImage.Resize(tileSize.X, tileSize.Y);
+        }
+
+        destinationImage.BlitRect(sourceImage, sourceRect, destinationPosition);
+    }
+
     record struct Wave(FastNoiseLite Noise, float Amplitude);
-    public Vector2I GenerateMap(TileMapLayer layer, int width, int height,
+    public Vector2I GenerateMap(TileMapLayer groundLayer, TileMapLayer plantLayer, int width, int height,
         Resource[] _heightWaves, Resource[] _moistureWaves, Resource[] _heatWaves)
     {
 #if DEBUG
@@ -132,6 +223,9 @@ public partial class MapGenerationServer : GodotObject
         try
         {
 #endif
+
+            groundLayer.Clear();
+            plantLayer.Clear();
 
             var heightWaves = toInternalWaves(_heightWaves);
             var moistureWaves = toInternalWaves(_moistureWaves);
@@ -158,12 +252,31 @@ public partial class MapGenerationServer : GodotObject
                         }
 
                     var cellTexture = biomes[bestBiomeIndex].Textures[GD.Randi() % biomes[bestBiomeIndex].Textures.Length];
-                    layer.SetCell(new(x, y), terrainTileSourceId, terrainTileIds[cellTexture]);
-                    cells[x, y] = biomes[bestBiomeIndex];
+                    groundLayer.SetCell(new(x, y), groundTileSourceId, groundTileIds[cellTexture]);
+                    var biome = cells[x, y] = biomes[bestBiomeIndex];
+
+                    // spawn plants
+                    if (biome.PlantSpawnChances.Length > 0)
+                    {
+                        var plantSpawnChance = GD.Randf();
+                        foreach (var plantSpawn in biome.PlantSpawnChances)
+                        {
+                            if (plantSpawnChance <= plantSpawn.ChancePercentage)
+                            {
+                                var plantTexture = plantSpawn.Plant.SpriteTexture;
+                                var plantTileId = plantTileIds[plantTexture];
+                                plantLayer.SetCell(new(x, y), plantTileSourceId, plantTileId);
+                                break;
+                            }
+                            else
+                                plantSpawnChance -= plantSpawn.ChancePercentage;
+                        }
+                    }
                 }
 
-            // and center the layer
-            layer.Position = -new Vector2(width, height) / 2 * tileSize;
+            // and center the layers
+            groundLayer.Position = -new Vector2(width, height) / 2 * tileSize;
+            plantLayer.Position = -new Vector2(width, height) / 2 * tileSize;
 
             if (FindLargestStartingLocation() is { } startingLocation)
             {
@@ -219,8 +332,8 @@ public partial class MapGenerationServer : GodotObject
                             var current = openCells.Pop();
                             visited[current.X, current.Y] = true;
 
-                            foreach (var offset in new Vector2I[]
-                                { new(1, 0), new(-1, 0), new(0, 1), new(0, -1) })
+                            foreach (var offset in (ReadOnlySpan<Vector2I>)
+                                [new(1, 0), new(-1, 0), new(0, 1), new(0, -1)])
                             {
                                 var neighbor = current + offset;
                                 if (neighbor.X < 0 || neighbor.X >= width

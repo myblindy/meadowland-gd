@@ -1,10 +1,11 @@
 extends Node2D
 
 func _ready() -> void:
-	GameStateServer.map_generation_server.InitializeTileSet($TileMapGroundLayer)
+	GameStateServer.map_generation_server.InitializeGroundTileSet($TileMapGroundLayer)
+	GameStateServer.map_generation_server.InitializePlantTileSet($TileMapPlantLayer)
 	var map_size := Vector2i(200, 200)
 	var starting_location := GameStateServer.map_generation_server.GenerateMap(
-		$TileMapGroundLayer, map_size.x, map_size.y,
+		$TileMapGroundLayer, $TileMapPlantLayer, map_size.x, map_size.y,
 		[
 			MapGenerationWaveResource.new(randi(), 0.004, 1.0),
 			MapGenerationWaveResource.new(randi(), 0.002, 0.5),
