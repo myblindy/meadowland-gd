@@ -61,7 +61,7 @@ public partial class MapGenerationServer : GodotObject
 
             var tilesetPath = biomePath + "tilesets/"
                 + (string.IsNullOrWhiteSpace(biome.Get("tileset").AsString()) ? biome.Get("name").AsString() : biome.Get("tileset").AsString())
-                    .Replace(' ', '_')
+                    .ToLowerInvariant().Replace(' ', '_')
                 + "/";
             var tilesetTextures = DirAccess.GetFilesAt(tilesetPath)
                 .Select(textureFile => textureFile.Replace(".remap", ""))
