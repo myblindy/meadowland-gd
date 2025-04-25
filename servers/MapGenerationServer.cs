@@ -31,6 +31,7 @@ public partial class MapGenerationServer : GodotObject
         // plants
         const string plantPath = "res://plants/";
         var plantFiles = DirAccess.GetFilesAt(plantPath)
+            .Select(file => file.Replace(".remap", ""))
             .Where(file => file.EndsWith(".tres"))
             .ToArray();
         plants = new Plant[plantFiles.Length];
@@ -47,7 +48,10 @@ public partial class MapGenerationServer : GodotObject
 
         // biomes
         const string biomePath = "res://biomes/";
-        var biomeFiles = DirAccess.GetFilesAt(biomePath);
+        var biomeFiles = DirAccess.GetFilesAt(biomePath)
+            .Select(file => file.Replace(".remap", ""))
+            .Where(file => file.EndsWith(".tres"))
+            .ToArray();
         biomes = new Biome[biomeFiles.Length];
 
         int biomeIndex = 0;
@@ -60,6 +64,7 @@ public partial class MapGenerationServer : GodotObject
                     .Replace(' ', '_')
                 + "/";
             var tilesetTextures = DirAccess.GetFilesAt(tilesetPath)
+                .Select(textureFile => textureFile.Replace(".remap", ""))
                 .Where(textureFile => textureFile.EndsWith(".png"))
                 .Select(textureFile => GD.Load<Texture2D>(tilesetPath + textureFile))
                 .ToArray();
