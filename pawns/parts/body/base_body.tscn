@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyvtd1xwsvw4x"]
+
+[ext_resource type="Script" uid="uid://3otbrg1sxnfv" path="res://pawns/parts/body/base_body.gd" id="1_rpu83"]
+
+[node name="BaseBody" type="Node2D"]
+script = ExtResource("1_rpu83")
+skin_color = Color(1, 1, 1, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -50)
+
+[node name="CoatRoot" type="Node2D" parent="."]
+scale = Vector2(0.81, 1)
+
+[node name="HatRoot" type="Node2D" parent="."]

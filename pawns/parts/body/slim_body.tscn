@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://5ngk4v14v5pf"]
+
+[ext_resource type="PackedScene" uid="uid://dyvtd1xwsvw4x" path="res://pawns/parts/body/base_body.tscn" id="1_nfo3p"]
+[ext_resource type="Texture2D" uid="uid://cmijm423v5yff" path="res://pawns/parts/body/slim_body.svg" id="2_k2inx"]
+
+[node name="BaseBody" instance=ExtResource("1_nfo3p")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_k2inx")

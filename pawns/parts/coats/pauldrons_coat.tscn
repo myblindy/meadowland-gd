@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://chg5q78k3dd60"]
+
+[ext_resource type="PackedScene" uid="uid://coaun6uyw30eh" path="res://pawns/parts/coats/base_coat.tscn" id="1_nwrg7"]
+[ext_resource type="Texture2D" uid="uid://dun11ntyx3m2s" path="res://pawns/parts/coats/pauldrons_coat.svg" id="2_py7yx"]
+
+[node name="BaseCoat" instance=ExtResource("1_nwrg7")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_py7yx")

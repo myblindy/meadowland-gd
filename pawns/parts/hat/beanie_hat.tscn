@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhdrt574eg5j"]
+
+[ext_resource type="PackedScene" uid="uid://dyvy78gtbqjgq" path="res://pawns/parts/hat/base_hat.tscn" id="1_cwkvh"]
+[ext_resource type="Texture2D" uid="uid://b3g6ct0558eu4" path="res://pawns/parts/hat/beanie_hat.svg" id="2_0xg3l"]
+
+[node name="BaseHat" instance=ExtResource("1_cwkvh")]
+color = Color(1, 1, 1, 1)
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_0xg3l")

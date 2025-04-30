@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://je7eks256f22"]
+
+[ext_resource type="PackedScene" uid="uid://dyvy78gtbqjgq" path="res://pawns/parts/hat/base_hat.tscn" id="1_2ri54"]
+[ext_resource type="Texture2D" uid="uid://jpw8lkxqxstg" path="res://pawns/parts/hat/warm_hat.svg" id="2_qt8jw"]
+
+[node name="BaseHat" instance=ExtResource("1_2ri54")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_qt8jw")

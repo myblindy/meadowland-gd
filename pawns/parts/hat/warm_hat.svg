@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <defs>
+  <linearGradient id="svg_16" x2="0" y2="1">
+   <stop id="jq_stop_5190" offset="0" stop-color="#ffffff"/>
+   <stop id="jq_stop_9126" offset="1" stop-color="#bcbcbc" stop-opacity="1"/>
+  </linearGradient>
+ </defs>
+ <g class="layer">
+  <title>Layer 1</title>
+  <path d="m32.97,9.43l62.09,0l3.48,30.78l-3.48,6.43l-14.7,0l3.73,-9l-4.61,-16.48l-32.18,-0.09l-3.84,17.13l4.16,8.43l-14.65,0c-1.62,-1.74 -3.25,-3.48 -4.87,-5.22l4.87,-32z" fill="url(#svg_16)" id="svg_17" stroke="#000000" stroke-linejoin="round" stroke-width="5"/>
+ </g>
+</svg>

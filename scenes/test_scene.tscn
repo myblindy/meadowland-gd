@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://br0rr3hhnsyjr"]
+[gd_scene load_steps=7 format=4 uid="uid://br0rr3hhnsyjr"]
 
+[ext_resource type="Script" uid="uid://dkp0wfk2vd7lp" path="res://scenes/test_scene.gd" id="1_7ddre"]
 [ext_resource type="Texture2D" uid="uid://cfilfaa2kyddd" path="res://textures/tst.png" id="1_g7g4h"]
 [ext_resource type="Texture2D" uid="uid://b5vwlsrqllwjr" path="res://textures/tst-uranium.png" id="2_j8ivh"]
 
@@ -748,7 +749,66 @@ sources/0 = SubResource("TileSetAtlasSource_j8ivh")
 sources/1 = SubResource("TileSetAtlasSource_nd71p")
 
 [node name="TestScene" type="Node2D"]
+script = ExtResource("1_7ddre")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-248, -70)
 tile_map_data = PackedByteArray("AAD+//j/AAACAAAAAAD+//n/AAABAAIAAAD///n/AAABAAIAAAD///r/AAADAAEAAAAAAPr/AAAFAAEAAAABAPv/AQACAAIAAAADAP7/AAAAAAEAAQADAP3/AAACAAEAAQADAPz/AAAEAAEAAQADAPv/AAABAAIAAAADAPr/AAACAAAAAAADAPn/AQADAAIAAAADAPj/AQAHAAIAAAACAP7/AAABAAUAAQACAPv/AAACAAEAAAACAPr/AAAGAAAAAQACAPn/AAAAAAAAAQACAPj/AQACAAMAAAABAP7/AAAEAAMAAAABAPr/AAADAAEAAAABAPn/AAAEAAAAAQABAPj/AAAAAAAAAQAAAPn/AAABAAIAAAAAAPj/AAACAAAAAAD///j/AAACAAAAAAD+//7/AAAAAAEAAAD+//z/AAAEAAIAAAD+//v/AAAEAAIAAAD+//r/AAAFAAEAAAAFAPz/AAAAAAEAAQAFAPv/AAACAAEAAQAFAPr/AAACAAEAAQAFAPn/AAAAAAAAAQAEAPz/AAADAAEAAAAEAPv/AAABAAIAAAAEAPr/AAAEAAAAAAAEAPn/AAAAAAAAAAD9//r/AAAAAAEAAAD9//n/AAAEAAEAAAD9//j/AAACAAAAAAD8//n/AAADAAEAAAD8//j/AAACAAAAAAD7//r/AAAEAAIAAAD7//n/AAAFAAMAAQD7//j/AAAAAAAAAAD8//z/AAADAAIAAAD8//v/AAAAAAMAAQD7//v/AAAAAAQAAAAEAPj/AQACAAMAAQADAPf/AQACAAIAAAACAP3/AAACAAEAAAACAPz/AAACAAEAAAABAP3/AQADAAIAAAAAAP7/AAABAAUAAAAAAP3/AAAAAAAAAQAAAPv/AAADAAIAAAD///7/AAADAAEAAAD///3/AAACAAAAAAD///z/AQAAAAQAAAD///v/AQACAAIAAAD+//3/AAAFAAIAAQABAPz/AQAFAAQAAAAAAPz/AQAEAAMAAAA=")
 tile_set = SubResource("TileSet_a5oyu")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 14.0
+offset_top = 18.0
+offset_right = 152.0
+offset_bottom = 68.0
+text = "Randomize"
+
+[node name="BodyMarker" type="Marker2D" parent="."]
+position = Vector2(186, 301)
+
+[node name="BodyMarker2" type="Marker2D" parent="."]
+position = Vector2(301, 301)
+
+[node name="BodyMarker3" type="Marker2D" parent="."]
+position = Vector2(395, 301)
+
+[node name="BodyMarker4" type="Marker2D" parent="."]
+position = Vector2(510, 301)
+
+[node name="BodyMarker5" type="Marker2D" parent="."]
+position = Vector2(618, 301)
+
+[node name="BodyMarker6" type="Marker2D" parent="."]
+position = Vector2(733, 301)
+
+[node name="BodyMarker7" type="Marker2D" parent="."]
+position = Vector2(827, 301)
+
+[node name="BodyMarker8" type="Marker2D" parent="."]
+position = Vector2(942, 301)
+
+[node name="BodyMarker9" type="Marker2D" parent="."]
+position = Vector2(186, 581)
+
+[node name="BodyMarker10" type="Marker2D" parent="."]
+position = Vector2(301, 581)
+
+[node name="BodyMarker11" type="Marker2D" parent="."]
+position = Vector2(395, 581)
+
+[node name="BodyMarker12" type="Marker2D" parent="."]
+position = Vector2(510, 581)
+
+[node name="BodyMarker13" type="Marker2D" parent="."]
+position = Vector2(618, 581)
+
+[node name="BodyMarker14" type="Marker2D" parent="."]
+position = Vector2(733, 581)
+
+[node name="BodyMarker15" type="Marker2D" parent="."]
+position = Vector2(827, 581)
+
+[node name="BodyMarker16" type="Marker2D" parent="."]
+position = Vector2(942, 581)
+
+[connection signal="pressed" from="Button" to="." method="_on_randomize_button_pressed"]

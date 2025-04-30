@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6fweeswcqnsy"]
+
+[ext_resource type="PackedScene" uid="uid://coaun6uyw30eh" path="res://pawns/parts/coats/base_coat.tscn" id="1_5g4mv"]
+[ext_resource type="Texture2D" uid="uid://b8fy537xw702d" path="res://pawns/parts/coats/jacket_coat.svg" id="2_3by8q"]
+
+[node name="BaseCoat" instance=ExtResource("1_5g4mv")]
+color = Color(1, 1, 1, 1)
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_3by8q")

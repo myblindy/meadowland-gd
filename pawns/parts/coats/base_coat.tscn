@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://coaun6uyw30eh"]
+
+[ext_resource type="Script" uid="uid://dnlm6hpthjnse" path="res://pawns/parts/coats/base_coat.gd" id="1_w510s"]
+
+[node name="BaseCoat" type="Node2D"]
+script = ExtResource("1_w510s")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -50)
