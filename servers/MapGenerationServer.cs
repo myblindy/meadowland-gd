@@ -10,7 +10,7 @@ public partial class MapGenerationServer : GodotObject
     readonly record struct Plant(string Name, Texture2D SpriteTexture);
 
     readonly record struct PlantSpawnChance(Plant Plant, float ChancePercentage);
-    readonly record struct Biome(string Name, bool Passable,
+    readonly record struct Biome(string Name, bool Passable, bool SpawnMines,
         double Height, double Moisture, double Heat, Texture2D[] Textures,
         PlantSpawnChance[] PlantSpawnChances)
     {
@@ -89,6 +89,7 @@ public partial class MapGenerationServer : GodotObject
             biomes[biomeIndex++] = new Biome(
                 biome.Get("name").AsString(),
                 biome.Get("movement_modifier").AsSingle() > 0,
+                biome.Get("spawn_mines").AsBool(),
                 biome.Get("min_height").AsSingle(),
                 biome.Get("min_moisture").AsSingle(),
                 biome.Get("min_heat").AsSingle(),
@@ -220,8 +221,8 @@ public partial class MapGenerationServer : GodotObject
     }
 
     record struct Wave(FastNoiseLite Noise, float Amplitude);
-    public Vector2I GenerateMap(TileMapLayer groundLayer, TileMapLayer plantLayer, int width, int height,
-        Resource[] _heightWaves, Resource[] _moistureWaves, Resource[] _heatWaves)
+    public Vector2I GenerateMap(TileMapLayer groundLayer, TileMapLayer plantLayer, TileMapLayer miningLayer,
+        int width, int height, Resource[] _heightWaves, Resource[] _moistureWaves, Resource[] _heatWaves)
     {
 #if DEBUG
         var stopwatch = Stopwatch.StartNew();
@@ -231,6 +232,7 @@ public partial class MapGenerationServer : GodotObject
 
             groundLayer.Clear();
             plantLayer.Clear();
+            miningLayer.Clear();
 
             var heightWaves = toInternalWaves(_heightWaves);
             var moistureWaves = toInternalWaves(_moistureWaves);
@@ -238,6 +240,7 @@ public partial class MapGenerationServer : GodotObject
 
         rebuild:
             var cells = new Biome[width, height];
+            var miningCells = new Godot.Collections.Array<Vector2I>();
 
             for (int y = 0; y < height; ++y)
                 for (int x = 0; x < width; ++x)
@@ -277,11 +280,20 @@ public partial class MapGenerationServer : GodotObject
                                 plantSpawnChance -= plantSpawn.ChancePercentage;
                         }
                     }
+
+                    // retain the mining resources to spawn when we know them all
+                    if(biome.SpawnMines)
+                    {
+                        miningCells.Add(new(x, y));
+                    }
                 }
 
+            // spawn mining resources
+            miningLayer.SetCellsTerrainConnect(miningCells, 0, 0);
+
             // and center the layers
-            groundLayer.Position = -new Vector2(width, height) / 2 * tileSize;
-            plantLayer.Position = -new Vector2(width, height) / 2 * tileSize;
+            groundLayer.Position = plantLayer.Position = miningLayer.Position =
+                -new Vector2(width, height) / 2 * tileSize;
 
             if (FindLargestStartingLocation() is { } startingLocation)
             {

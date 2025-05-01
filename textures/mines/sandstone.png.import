@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5vwlsrqllwjr"
-path="res://.godot/imported/tst-uranium.png-87d725aa4814f6a0e2c1da1af8a0d630.ctex"
+uid="uid://cfilfaa2kyddd"
+path="res://.godot/imported/sandstone.png-73bab9390bb261f6a182d98aa52c7149.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tst-uranium.png"
-dest_files=["res://.godot/imported/tst-uranium.png-87d725aa4814f6a0e2c1da1af8a0d630.ctex"]
+source_file="res://textures/mines/sandstone.png"
+dest_files=["res://.godot/imported/sandstone.png-73bab9390bb261f6a182d98aa52c7149.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

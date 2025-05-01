@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://br0rr3hhnsyjr"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://ccj0cetq68ngx"]
 
-[ext_resource type="Script" uid="uid://dkp0wfk2vd7lp" path="res://scenes/test_scene.gd" id="1_7ddre"]
-[ext_resource type="Texture2D" uid="uid://cfilfaa2kyddd" path="res://textures/mines/sandstone.png" id="1_g7g4h"]
-[ext_resource type="Texture2D" uid="uid://b5vwlsrqllwjr" path="res://textures/mines/uranium.png" id="2_j8ivh"]
+[ext_resource type="Texture2D" uid="uid://cfilfaa2kyddd" path="res://textures/mines/sandstone.png" id="1_bi6u6"]
+[ext_resource type="Texture2D" uid="uid://b5vwlsrqllwjr" path="res://textures/mines/uranium.png" id="2_rnewk"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nd71p"]
-texture = ExtResource("1_g7g4h")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c16ls"]
+texture = ExtResource("1_bi6u6")
 texture_region_size = Vector2i(32, 32)
 0:0/next_alternative_id = 4
 0:0/0 = 0
@@ -371,8 +370,8 @@ texture_region_size = Vector2i(32, 32)
 1:3/0/terrains_peering_bit/bottom_side = 0
 1:3/0/terrains_peering_bit/left_side = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7ddre"]
-texture = ExtResource("2_j8ivh")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18nlu"]
+texture = ExtResource("2_rnewk")
 texture_region_size = Vector2i(32, 32)
 0:0/next_alternative_id = 4
 0:0/0 = 0
@@ -738,7 +737,7 @@ texture_region_size = Vector2i(32, 32)
 5:0/2/terrains_peering_bit/bottom_side = 1
 5:0/2/terrains_peering_bit/top_side = 1
 
-[sub_resource type="TileSet" id="TileSet_a5oyu"]
+[resource]
 tile_size = Vector2i(32, 32)
 uv_clipping = true
 terrain_set_0/mode = 0
@@ -746,70 +745,5 @@ terrain_set_0/terrain_0/name = "Sandstone"
 terrain_set_0/terrain_0/color = Color(0.696214, 1.05888e-06, 0.392036, 1)
 terrain_set_0/terrain_1/name = "Uranium"
 terrain_set_0/terrain_1/color = Color(0.445471, 0.226733, 1, 1)
-sources/0 = SubResource("TileSetAtlasSource_nd71p")
-sources/1 = SubResource("TileSetAtlasSource_7ddre")
-
-[node name="TestScene" type="Node2D"]
-script = ExtResource("1_7ddre")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(-248, -70)
-tile_map_data = PackedByteArray("AAABAAEAAQAAAAEAAwABAAAAAQACAAEAAwABAP//AQAGAAEAAwABAP7/AQAFAAIAAAAAAAEAAQAEAAEAAwAAAAAAAQABAAIAAAAAAP//AQABAAIAAAAAAP7/AQACAAAAAAD//wEAAQACAAEAAAD//wAAAQAEAAEAAAD/////AQABAAIAAAD///7/AQAEAAAAAwD+////AQABAAIAAAD+//7/AQAEAAAAAAD9////AQAEAAEAAAD9//7/AQACAAAAAAD+/wAAAQADAAEAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAwABAP3/AQABAAAAAAACAP//AQAEAAMAAAACAP3/AQADAAAAAgADAP7/AQAAAAAAAAADAP//AQAGAAIAAwADAAAAAQAEAAIAAAAEAP//AQADAAEAAAAEAP7/AQAEAAAAAAAFAP7/AQACAAEAAwAFAP//AQAFAAMAAAAFAAAAAQAEAAIAAAADAAEAAQADAAIAAAAFAAEAAQADAAIAAAAEAP3/AQAAAAAAAAAFAP3/AQAFAAIAAAAFAPz/AQAEAAIAAAAEAPv/AQADAAAAAAAFAPv/AQABAAAAAgAAAAIAAQAAAAEAAwD//wIAAQAAAAEAAAD9/wAAAQAFAAMAAwD9/wEAAQAFAAAAAAD9/wIAAQADAAIAAAD8/wEAAQADAAAAAAD8//7/AQAEAAAAAwD7//7/AQACAAEAAAD7//3/AQAAAAMAAAD7////AQACAAMAAwD6////AQADAAAAAAD6//3/AQADAAAAAAD8//3/AQAAAAAAAwD8////AQADAAEAAAA=")
-tile_set = SubResource("TileSet_a5oyu")
-
-[node name="Button" type="Button" parent="."]
-offset_left = 14.0
-offset_top = 18.0
-offset_right = 152.0
-offset_bottom = 68.0
-text = "Randomize"
-
-[node name="BodyMarker" type="Marker2D" parent="."]
-position = Vector2(186, 301)
-
-[node name="BodyMarker2" type="Marker2D" parent="."]
-position = Vector2(301, 301)
-
-[node name="BodyMarker3" type="Marker2D" parent="."]
-position = Vector2(395, 301)
-
-[node name="BodyMarker4" type="Marker2D" parent="."]
-position = Vector2(510, 301)
-
-[node name="BodyMarker5" type="Marker2D" parent="."]
-position = Vector2(618, 301)
-
-[node name="BodyMarker6" type="Marker2D" parent="."]
-position = Vector2(733, 301)
-
-[node name="BodyMarker7" type="Marker2D" parent="."]
-position = Vector2(827, 301)
-
-[node name="BodyMarker8" type="Marker2D" parent="."]
-position = Vector2(942, 301)
-
-[node name="BodyMarker9" type="Marker2D" parent="."]
-position = Vector2(186, 581)
-
-[node name="BodyMarker10" type="Marker2D" parent="."]
-position = Vector2(301, 581)
-
-[node name="BodyMarker11" type="Marker2D" parent="."]
-position = Vector2(395, 581)
-
-[node name="BodyMarker12" type="Marker2D" parent="."]
-position = Vector2(510, 581)
-
-[node name="BodyMarker13" type="Marker2D" parent="."]
-position = Vector2(618, 581)
-
-[node name="BodyMarker14" type="Marker2D" parent="."]
-position = Vector2(733, 581)
-
-[node name="BodyMarker15" type="Marker2D" parent="."]
-position = Vector2(827, 581)
-
-[node name="BodyMarker16" type="Marker2D" parent="."]
-position = Vector2(942, 581)
-
-[connection signal="pressed" from="Button" to="." method="_on_randomize_button_pressed"]
+sources/0 = SubResource("TileSetAtlasSource_c16ls")
+sources/1 = SubResource("TileSetAtlasSource_18nlu")

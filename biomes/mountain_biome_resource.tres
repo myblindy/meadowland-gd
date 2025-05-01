@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://c62kqokd4pidd"]
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=3 format=3 uid="uid://c62kqokd4pidd"]
 
+[ext_resource type="Script" uid="uid://be7fg6nnau3qt" path="res://resources/game_biome_plant_chance_resource.gd" id="1_7m3vl"]
 [ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_srn20"]
 
 [resource]
 script = ExtResource("1_srn20")
 name = "Mountain"
+tileset = ""
 movement_modifier = 0.3
 min_height = 0.7
 min_moisture = 0.0
 min_heat = 0.0
+plants = Array[ExtResource("1_7m3vl")]([])
+spawn_mines = true
 metadata/_custom_type_script = "uid://op5i02bjrc1y"
