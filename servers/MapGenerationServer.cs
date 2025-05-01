@@ -337,7 +337,7 @@ public partial class MapGenerationServer : GodotObject
                 {
                     for (int x = 0; x < width; ++x)
                     {
-                        if (visited[x, y] || !cells[x, y].Passable)
+                        if (visited[x, y] || !cells[x, y].Passable || cells[x, y].SpawnMines)
                             continue;
 
                         var openCells = new Stack<Vector2I>();
