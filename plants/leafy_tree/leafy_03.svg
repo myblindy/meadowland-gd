@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="64"
+   viewBox="0 0 32 64"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="leafy_03.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="11.419338"
+     inkscape:cx="9.9392802"
+     inkscape:cy="33.583383"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="3831"
+     inkscape:window-y="1194"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="0,64"
+       orientation="0,32"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32,64"
+       orientation="64,0"
+       id="guide5"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32,0"
+       orientation="0,-32"
+       id="guide6"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="-64,0"
+       id="guide7"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="Tree_5_1_"
+       transform="matrix(0.11486001,0,0,0.1320132,-222.66762,-347.49835)">
+					<g
+   id="Leaves_21_">
+						<path
+   class="st88"
+   d="m 2216.9,2848.5 c 0,119.4 -30.3,216.2 -138.1,216.2 -106.1,0 -140.2,-96.8 -140.2,-216.2 0,-119.4 20.3,-216.2 140.2,-216.2 120.1,0 138.1,96.8 138.1,216.2 z"
+   id="path557"
+   style="fill:#40ee96" />
+
+						<path
+   class="st89"
+   d="m 2217.2,2848.5 c 0,119.4 -30.3,216.2 -138.1,216.2 20.3,-32.4 55.9,-99.3 61.6,-190.8 7.5,-120.8 -41.7,-209.6 -61.6,-241.6 120.1,0 138.1,96.8 138.1,216.2 z"
+   id="path558"
+   style="fill:#0fb75b" />
+
+					</g>
+
+					<g
+   id="Trunk_and_branches_8_">
+						<g
+   id="g560">
+							<path
+   class="st91"
+   d="m 2074.5,3022.9 c 0,0 -0.9,18.6 -0.9,18.5 l -77.5,-118.2 c -0.2,-0.4 0.3,-0.7 0.5,-0.4 l 77.9,100 z"
+   id="path559"
+   style="fill:#6b4019" />
+
+							<path
+   class="st90"
+   d="m 2074.2,3031.8 c 0,0 -0.6,9.6 -0.6,9.6 l -77.5,-118.2 c -0.2,-0.4 0.3,-0.7 0.5,-0.4 l 77.6,108.9 z"
+   id="path560"
+   style="fill:#a77b51" />
+
+						</g>
+
+						<g
+   id="g562">
+							<path
+   class="st90"
+   d="m 2068.4,3117.1 h 23.3 c 0.1,0 0.2,-0.1 0.2,-0.2 l -11.1,-309.6 c 0,-1 -1.4,-1 -1.4,0 l -11.1,309.6 c -0.1,0.1 0,0.2 0.1,0.2 z"
+   id="path561"
+   style="fill:#a77b51" />
+
+							<path
+   class="st91"
+   d="m 2080.2,3117.1 h 11.6 c 0.1,0 0.2,-0.1 0.2,-0.2 l -11.1,-309.6 c 0,-1 -1.4,-1 -1.4,0 l 0.6,309.6 c -0.1,0.1 0,0.2 0.1,0.2 z"
+   id="path562"
+   style="fill:#6b4019" />
+
+						</g>
+
+						<g
+   id="g564">
+							<path
+   class="st91"
+   d="m 2082.1,2938.5 c 0,0 0.8,16.3 0.8,16.3 l 68.2,-104 c 0.2,-0.3 -0.2,-0.6 -0.5,-0.3 l -68.5,87.9 c -0.1,0 -0.1,0 0,0.1 z"
+   id="path563"
+   style="fill:#6b4019" />
+
+							<path
+   class="st90"
+   d="m 2082.1,2938.5 c 0,0 0.3,6.9 0.3,6.8 l 68.7,-94.5 c 0.2,-0.3 -0.2,-0.6 -0.5,-0.3 l -68.5,87.9 c -0.1,0 -0.1,0 0,0.1 z"
+   id="path564"
+   style="fill:#a77b51" />
+
+						</g>
+
+					</g>
+
+				</g>
+  </g>
+</svg>

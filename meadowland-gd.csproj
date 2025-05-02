@@ -4,5 +4,6 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>meadowlandgd</RootNamespace>
     <Nullable>Enable</Nullable>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 </Project>

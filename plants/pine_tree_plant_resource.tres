@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="GamePlantResource" load_steps=6 format=3 uid="uid://dwhsniydeuar6"]
+[gd_resource type="Resource" script_class="GamePlantResource" load_steps=7 format=3 uid="uid://dwhsniydeuar6"]
 
 [ext_resource type="Script" uid="uid://16rvp5xx1kty" path="res://resources/game_resource_quantity_resource.gd" id="1_d83je"]
 [ext_resource type="Resource" uid="uid://d16v63tmyw83f" path="res://items/wood_item_resource.tres" id="2_x8v7a"]
 [ext_resource type="Script" uid="uid://bg8duyxyp6xfs" path="res://resources/game_plant_resource.gd" id="3_6fi0x"]
-[ext_resource type="Texture2D" uid="uid://dklbqfhvb8v8e" path="res://plants/pine_tree_plant.png" id="4_d83je"]
+[ext_resource type="Image" uid="uid://dgd6uki43o7uh" path="res://plants/pine_tree/pine_01.svg" id="4_x8v7a"]
+[ext_resource type="Image" uid="uid://cchc3cv5qny6c" path="res://plants/pine_tree/pine_02.svg" id="5_6fi0x"]
 
 [sub_resource type="Resource" id="Resource_wiv04"]
 script = ExtResource("1_d83je")
@@ -14,7 +15,7 @@ metadata/_custom_type_script = "uid://16rvp5xx1kty"
 [resource]
 script = ExtResource("3_6fi0x")
 name = "Pine Tree"
-sprite_texture = ExtResource("4_d83je")
+sprite_textures = Array[Image]([ExtResource("4_x8v7a"), ExtResource("5_6fi0x")])
 containing_resources = Array[ExtResource("1_d83je")]([SubResource("Resource_wiv04")])
 harvest_work_ticks = 35
 days_from_spawn_to_full_growth = 10

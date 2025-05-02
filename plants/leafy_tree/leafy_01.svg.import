@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://dsqbkvg22c5ou"
+path="res://.godot/imported/leafy_01.svg-1e6f2c3d469ccd1a03270a421744afcf.image"
+
+[deps]
+
+source_file="res://plants/leafy_tree/leafy_01.svg"
+dest_files=["res://.godot/imported/leafy_01.svg-1e6f2c3d469ccd1a03270a421744afcf.image"]
+
+[params]
+

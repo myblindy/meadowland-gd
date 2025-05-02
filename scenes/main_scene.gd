@@ -2,10 +2,10 @@ extends Node2D
 
 func _ready() -> void:
 	GameStateServer.map_generation_server.InitializeGroundTileSet($TileMapGroundLayer)
-	GameStateServer.map_generation_server.InitializePlantTileSet($TileMapPlantLayer)
+	GameStateServer.map_generation_server.InitializePlantTileSet($TileMapPlantLayer, $TileMapPlantLayer2)
 	var map_size := Vector2i(200, 200)
 	var starting_location := GameStateServer.map_generation_server.GenerateMap(
-		$TileMapGroundLayer, $TileMapPlantLayer, $TileMapMiningLayer,
+		$TileMapGroundLayer, $TileMapPlantLayer, $TileMapPlantLayer2, $TileMapMiningLayer,
 		map_size.x, map_size.y,
 		[
 			MapGenerationWaveResource.new(randi(), 0.004, 1.0),
@@ -68,7 +68,7 @@ func _create_random_at_position(pawn_position: Vector2) -> BaseBody:
 	else:
 		body.hat = null
 
-	add_child(body)
+	$PawnRoot.add_child(body)
 	body.position = (pawn_position + Vector2(0.5, 0)) * Vector2(
 		GameStateServer.map_generation_server.TileSize.x,
 		GameStateServer.map_generation_server.TileSize.y)

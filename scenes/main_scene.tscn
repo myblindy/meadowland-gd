@@ -16,6 +16,11 @@ script = ExtResource("1_pw63i")
 position = Vector2(-248, -70)
 tile_set = ExtResource("2_pu3yx")
 
+[node name="PawnRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="TileMapPlantLayer2" type="TileMapLayer" parent="."]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_7ykc4")
 

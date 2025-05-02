@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="64"
+   viewBox="0 0 32 64"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="leafy_02.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="11.419338"
+     inkscape:cx="9.9392802"
+     inkscape:cy="33.583383"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="3831"
+     inkscape:window-y="1194"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="0,64"
+       orientation="0,32"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32,64"
+       orientation="64,0"
+       id="guide5"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="32,0"
+       orientation="0,-32"
+       id="guide6"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="-64,0"
+       id="guide7"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="Tree_2_1_"
+       transform="matrix(0.08683853,0,0,0.12997561,-53.20596,-341.64086)">
+					<g
+   id="Leaves_18_">
+						<g
+   id="g572">
+							<circle
+   class="st88"
+   cx="792"
+   cy="2758.8999"
+   r="130.39999"
+   id="circle570"
+   style="fill:#40ee96" />
+
+							<circle
+   class="st88"
+   cx="879.20001"
+   cy="2884.7"
+   r="101.9"
+   id="circle571"
+   style="fill:#40ee96" />
+
+							<circle
+   class="st88"
+   cx="714.59998"
+   cy="2884.7"
+   r="101.9"
+   id="circle572"
+   style="fill:#40ee96" />
+
+						</g>
+
+						<path
+   class="st92"
+   d="m 920.5,2791.5 c 1.3,-9.9 1.9,-20.7 1.9,-32.6 0,-72 -58.4,-130.4 -130.4,-130.4 11.7,14.5 80.8,103 59,216.9 -10,52.3 -35.4,89.7 -52.2,110.4 18.6,22.2 47.7,30.7 80.5,30.7 56.3,0 101.9,-14.3 101.9,-101.9 -0.1,-41.5 -25,-77.2 -60.7,-93.1 z"
+   id="path572"
+   style="fill:#10b557" />
+
+					</g>
+
+					<g
+   id="Trunk_and_banches_1_">
+						<g
+   id="g574">
+							<path
+   class="st90"
+   d="m 792.4,2962.5 c 0,0 -0.7,14.3 -0.7,14.3 l -59.8,-91.2 c -0.2,-0.3 0.2,-0.6 0.4,-0.3 z"
+   id="path573"
+   style="fill:#a77b51" />
+
+							<path
+   class="st91"
+   d="m 792.4,2962.5 c 0,0 -0.3,7.1 -0.3,7 l -60.2,-83.9 c -0.2,-0.3 0.2,-0.6 0.4,-0.3 z"
+   id="path574"
+   style="fill:#6b4019" />
+
+						</g>
+
+						<g
+   id="g576">
+							<path
+   class="st90"
+   d="m 784.5,3120.9 h 24.8 c 0.1,0 0.2,-0.1 0.2,-0.2 l -11.9,-286.8 c 0,-1 -1.5,-1 -1.5,0 l -11.9,286.8 c 0.1,0.1 0.2,0.2 0.3,0.2 z"
+   id="path575"
+   style="fill:#a77b51" />
+
+							<path
+   class="st91"
+   d="m 797,3120.9 h 12.3 c 0.1,0 0.2,-0.1 0.2,-0.2 l -11.9,-286.8 c 0,-1 -1.5,-1 -1.5,0 l 0.7,286.8 c 0,0.1 0.1,0.2 0.2,0.2 z"
+   id="path576"
+   style="fill:#6b4019" />
+
+						</g>
+
+						<g
+   id="g579">
+							<path
+   class="st90"
+   d="m 801.1,2962.5 c 0,0 0.7,14.3 0.7,14.3 l 59.8,-91.2 c 0.2,-0.3 -0.2,-0.6 -0.4,-0.3 z"
+   id="path577"
+   style="fill:#a77b51" />
+
+							<g
+   id="g578">
+								<path
+   class="st91"
+   d="m 861.6,2885.7 -59,89.9 -0.8,1.3 -0.3,-3.8 -0.4,-4.5 60.4,-83.2 c 0.1,0 0.2,0.1 0.1,0.3 z"
+   id="path578"
+   style="fill:#6b4019" />
+
+							</g>
+
+						</g>
+
+					</g>
+
+				</g>
+  </g>
+</svg>
