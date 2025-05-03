@@ -1,5 +1,7 @@
 extends Camera2D
 
+@export var additional_cameras_to_set: Array[Camera2D] = []
+
 var _zoom_tween: Tween
 
 const _min_zoom := 0.25
@@ -30,6 +32,10 @@ func _process(delta: float) -> void:
 	if delta_zoom != 0:
 		zoom += Vector2(delta_zoom, delta_zoom) * 0.1 * delta
 		zoom = clamp(zoom, Vector2(0.25, 0.25), Vector2(2, 2))
+		
+	for additional_camera_to_set in additional_cameras_to_set:
+		additional_camera_to_set.zoom = zoom
+		additional_camera_to_set.global_position = global_position - Vector2(0, 1)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("camera_zoom_in"):

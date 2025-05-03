@@ -53,13 +53,7 @@ public partial class MapGenerationServer : GodotObject
         {
             var biome = GD.Load<Resource>(biomePath + biomeFile);
 
-            var tilesetPath = biomePath + "tilesets/"
-                + (string.IsNullOrWhiteSpace(biome.Get("tileset").AsString()) ? biome.Get("name").AsString() : biome.Get("tileset").AsString())
-                    .ToLowerInvariant().Replace(' ', '_')
-                + "/";
-            var tilesetImages = AssetLoadingHelpers.EnumerateAssets(tilesetPath, ".png", ".svg")
-                .Select(textureFile => GD.Load<Image>(tilesetPath + textureFile))
-                .ToArray();
+            var tilesetImages = biome.Get("tileset").AsGodotObjectArray<Image>();
 
             var plantSpawnChances = biome.Get("plants").AsGodotObjectArray<Resource>()
                 .Select(plantSpawnChance =>

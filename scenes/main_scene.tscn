@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://6j8fy1frgkdh"]
+[gd_scene load_steps=7 format=3 uid="uid://6j8fy1frgkdh"]
 
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main_scene_build_panel.gd" id="1_w2twt"]
 [ext_resource type="TileSet" uid="uid://ccj0cetq68ngx" path="res://resources/game_mining_tileset_resource.tres" id="2_pu3yx"]
 [ext_resource type="Script" uid="uid://domuhsksyf45b" path="res://scenes/camera.gd" id="3_7ykc4"]
+[ext_resource type="Shader" uid="uid://bl1ahap57rqem" path="res://scenes/tree_sway_shader.gdshader" id="4_gubc5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pu3yx"]
+shader = ExtResource("4_gubc5")
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_pw63i")
@@ -19,12 +23,38 @@ tile_set = ExtResource("2_pu3yx")
 [node name="PawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="TileMapPlantLayer2" type="TileMapLayer" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("additional_cameras_to_set")]
 script = ExtResource("3_7ykc4")
+additional_cameras_to_set = [NodePath("../UICanvasLayer/SubViewportContainer/SubViewport/Camera2D")]
 
 [node name="UICanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UICanvasLayer"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("ShaderMaterial_pu3yx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UICanvasLayer/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="TileMapPlantLayer2" type="TileMapLayer" parent="UICanvasLayer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="UICanvasLayer/SubViewportContainer/SubViewport"]
 
 [node name="MarginContainer" type="MarginContainer" parent="UICanvasLayer"]
 anchors_preset = 12

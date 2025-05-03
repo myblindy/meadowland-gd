@@ -1,12 +1,18 @@
-[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=2 format=3 uid="uid://cgj8ru7qwob6i"]
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=5 format=3 uid="uid://cgj8ru7qwob6i"]
 
 [ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_351kv"]
+[ext_resource type="Script" uid="uid://be7fg6nnau3qt" path="res://resources/game_biome_plant_chance_resource.gd" id="1_bpuxu"]
+[ext_resource type="Image" uid="uid://bjdjt4ueu84g7" path="res://biomes/tilesets/water/shallow_water.png" id="3_2tx5w"]
+[ext_resource type="Image" uid="uid://d3681guh1i7mn" path="res://biomes/tilesets/water/shallow_water_2.png" id="4_fudjj"]
 
 [resource]
 script = ExtResource("1_351kv")
 name = "Water"
+tileset = Array[Image]([ExtResource("3_2tx5w"), ExtResource("4_fudjj")])
 movement_modifier = 0.0
 min_height = 0.1
 min_moisture = 0.0
 min_heat = 0.0
+plants = Array[ExtResource("1_bpuxu")]([])
+spawn_mines = false
 metadata/_custom_type_script = "uid://op5i02bjrc1y"

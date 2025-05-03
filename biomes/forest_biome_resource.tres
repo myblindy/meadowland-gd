@@ -1,8 +1,20 @@
-[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=5 format=3 uid="uid://d1md1dvc0sxma"]
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=17 format=3 uid="uid://d1md1dvc0sxma"]
 
 [ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_ejl7e"]
 [ext_resource type="Script" uid="uid://be7fg6nnau3qt" path="res://resources/game_biome_plant_chance_resource.gd" id="1_lp022"]
 [ext_resource type="Resource" uid="uid://ctj3w8g4y0n4i" path="res://plants/leafy_tree_plant_resource.tres" id="2_0ma44"]
+[ext_resource type="Image" uid="uid://cgj5qvrwx1ucc" path="res://biomes/tilesets/grass/grass_0_new.png" id="4_s6l1q"]
+[ext_resource type="Image" uid="uid://cbodlg28sifpi" path="res://biomes/tilesets/grass/grass_1_new.png" id="5_02oy0"]
+[ext_resource type="Image" uid="uid://b8khldx8s77b2" path="res://biomes/tilesets/grass/grass_2_new.png" id="6_u77g0"]
+[ext_resource type="Image" uid="uid://bomh01nju4e8y" path="res://biomes/tilesets/grass/grass_flowers_blue_1_new.png" id="7_xt2bu"]
+[ext_resource type="Image" uid="uid://hsvwn8ngy7jg" path="res://biomes/tilesets/grass/grass_flowers_blue_2_new.png" id="8_ouoru"]
+[ext_resource type="Image" uid="uid://cfqk7njrc1431" path="res://biomes/tilesets/grass/grass_flowers_blue_3_new.png" id="9_s6wnp"]
+[ext_resource type="Image" uid="uid://b6l2otvry55jp" path="res://biomes/tilesets/grass/grass_flowers_red_1_new.png" id="10_h4lu7"]
+[ext_resource type="Image" uid="uid://5ep004nphgpx" path="res://biomes/tilesets/grass/grass_flowers_red_2_new.png" id="11_c6xgg"]
+[ext_resource type="Image" uid="uid://ck7apy0ep225l" path="res://biomes/tilesets/grass/grass_flowers_red_3_new.png" id="12_pwmgv"]
+[ext_resource type="Image" uid="uid://233my6ec38a7" path="res://biomes/tilesets/grass/grass_flowers_yellow_1_new.png" id="13_aoplb"]
+[ext_resource type="Image" uid="uid://q05b0b7j7jf1" path="res://biomes/tilesets/grass/grass_flowers_yellow_2_new.png" id="14_gn4oj"]
+[ext_resource type="Image" uid="uid://8mir41o3dfut" path="res://biomes/tilesets/grass/grass_flowers_yellow_3_new.png" id="15_1l6ce"]
 
 [sub_resource type="Resource" id="Resource_kid8k"]
 script = ExtResource("1_lp022")
@@ -13,7 +25,7 @@ metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 [resource]
 script = ExtResource("1_ejl7e")
 name = "Forest"
-tileset = "grass"
+tileset = Array[Image]([ExtResource("4_s6l1q"), ExtResource("5_02oy0"), ExtResource("6_u77g0"), ExtResource("7_xt2bu"), ExtResource("8_ouoru"), ExtResource("9_s6wnp"), ExtResource("10_h4lu7"), ExtResource("11_c6xgg"), ExtResource("12_pwmgv"), ExtResource("13_aoplb"), ExtResource("14_gn4oj"), ExtResource("15_1l6ce")])
 movement_modifier = 0.9
 min_height = 0.25
 min_moisture = 0.6

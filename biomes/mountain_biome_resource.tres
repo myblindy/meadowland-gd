@@ -1,12 +1,28 @@
-[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=3 format=3 uid="uid://c62kqokd4pidd"]
+[gd_resource type="Resource" script_class="GameBiomeResource" load_steps=19 format=3 uid="uid://c62kqokd4pidd"]
 
 [ext_resource type="Script" uid="uid://be7fg6nnau3qt" path="res://resources/game_biome_plant_chance_resource.gd" id="1_7m3vl"]
 [ext_resource type="Script" uid="uid://op5i02bjrc1y" path="res://resources/game_biome_resource.gd" id="1_srn20"]
+[ext_resource type="Image" uid="uid://cybl1b2bw45wp" path="res://biomes/tilesets/mountain/grey_dirt_0_new.png" id="3_kl82h"]
+[ext_resource type="Image" uid="uid://d2j2qlk1n6us8" path="res://biomes/tilesets/mountain/grey_dirt_1_new.png" id="4_aqydu"]
+[ext_resource type="Image" uid="uid://ck1piahfxjoj6" path="res://biomes/tilesets/mountain/grey_dirt_2_new.png" id="5_r8uk6"]
+[ext_resource type="Image" uid="uid://ctnlkowv77jh2" path="res://biomes/tilesets/mountain/grey_dirt_3_new.png" id="6_81ni6"]
+[ext_resource type="Image" uid="uid://dj2rhv341ds7h" path="res://biomes/tilesets/mountain/grey_dirt_4_new.png" id="7_5p02u"]
+[ext_resource type="Image" uid="uid://ykebdhir0a14" path="res://biomes/tilesets/mountain/grey_dirt_5_new.png" id="8_hxs78"]
+[ext_resource type="Image" uid="uid://ctm2iytcxumbq" path="res://biomes/tilesets/mountain/grey_dirt_6_new.png" id="9_yg27j"]
+[ext_resource type="Image" uid="uid://dsiiol2m3e7yw" path="res://biomes/tilesets/mountain/grey_dirt_7_new.png" id="10_36dca"]
+[ext_resource type="Image" uid="uid://dviip2ct4xylh" path="res://biomes/tilesets/mountain/grey_dirt_b_0.png" id="11_wq6a0"]
+[ext_resource type="Image" uid="uid://dufm6fvqwwb5q" path="res://biomes/tilesets/mountain/grey_dirt_b_1.png" id="12_l558r"]
+[ext_resource type="Image" uid="uid://8s2ci1nreqyb" path="res://biomes/tilesets/mountain/grey_dirt_b_2.png" id="13_l3a6e"]
+[ext_resource type="Image" uid="uid://bfrcw1pkfgp1j" path="res://biomes/tilesets/mountain/grey_dirt_b_3.png" id="14_hqp8v"]
+[ext_resource type="Image" uid="uid://bcejwl48gdju1" path="res://biomes/tilesets/mountain/grey_dirt_b_4.png" id="15_tg4ey"]
+[ext_resource type="Image" uid="uid://ispy0o2neu4i" path="res://biomes/tilesets/mountain/grey_dirt_b_5.png" id="16_myg61"]
+[ext_resource type="Image" uid="uid://hi452jrq2fld" path="res://biomes/tilesets/mountain/grey_dirt_b_6.png" id="17_fml2r"]
+[ext_resource type="Image" uid="uid://db8d47amrj5s3" path="res://biomes/tilesets/mountain/grey_dirt_b_7.png" id="18_6ikwk"]
 
 [resource]
 script = ExtResource("1_srn20")
 name = "Mountain"
-tileset = ""
+tileset = Array[Image]([ExtResource("3_kl82h"), ExtResource("4_aqydu"), ExtResource("5_r8uk6"), ExtResource("6_81ni6"), ExtResource("7_5p02u"), ExtResource("8_hxs78"), ExtResource("9_yg27j"), ExtResource("10_36dca"), ExtResource("11_wq6a0"), ExtResource("12_l558r"), ExtResource("13_l3a6e"), ExtResource("14_hqp8v"), ExtResource("15_tg4ey"), ExtResource("16_myg61"), ExtResource("17_fml2r"), ExtResource("18_6ikwk")])
 movement_modifier = 0.3
 min_height = 0.7
 min_moisture = 0.0

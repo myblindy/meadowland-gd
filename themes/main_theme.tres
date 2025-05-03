@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://wk5uio83oxq7"]
 
 [ext_resource type="FontFile" uid="uid://c2tulh4a74a8d" path="res://themes/Oldenburg-Regular.ttf" id="1_rjgu6"]
-[ext_resource type="Texture2D" path="res://textures/gui/buttonLong_brown.png" id="1_vu6l5"]
-[ext_resource type="Texture2D" path="res://textures/gui/buttonLong_brown_pressed.png" id="2_ydht1"]
+[ext_resource type="Texture2D" uid="uid://d3n78kctrg05d" path="res://textures/gui/buttonLong_brown.png" id="1_vu6l5"]
+[ext_resource type="Texture2D" uid="uid://cxwjcru8bfhxu" path="res://textures/gui/buttonLong_brown_pressed.png" id="2_ydht1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ceur"]
 texture = ExtResource("1_vu6l5")

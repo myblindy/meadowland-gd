@@ -1,7 +1,7 @@
 class_name GameBiomeResource extends Resource
 
 @export var name: String
-@export var tileset: String
+@export var tileset: Array[Image]
 @export var movement_modifier: float
 @export var min_height: float
 @export var min_moisture: float
