@@ -1,15 +1,9 @@
 extends Node2D
 
-@onready var _sub_viewport_container := %SubViewportContainer
-@onready var _sub_viewport := %SubViewportContainer/SubViewport
-
-@onready var _camera := $Camera2D
-@onready var _sub_viewport_camera := %SubViewportContainer/SubViewport/Camera2D
-
 func _ready() -> void:
 	GameStateServer.map_generation_server.InitializeGroundTileSet($TileMapGroundLayer)
 	GameStateServer.map_generation_server.InitializePlantTileSet($TileMapPlantLayer, %TileMapPlantLayer2)
-	var map_size := Vector2i(200, 200)
+	var map_size := Vector2i(400, 400)
 	var starting_location := GameStateServer.map_generation_server.GenerateMap(
 		$TileMapGroundLayer, $TileMapPlantLayer, %TileMapPlantLayer2, $TileMapMiningLayer,
 		map_size.x, map_size.y,

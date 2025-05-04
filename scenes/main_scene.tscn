@@ -17,6 +17,7 @@ script = ExtResource("1_pw63i")
 
 [node name="TileMapPlantLayer" type="TileMapLayer" parent="."]
 y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
 y_sort_origin = 16
 
 [node name="TileMapMiningLayer" type="TileMapLayer" parent="."]
@@ -56,6 +57,7 @@ render_target_update_mode = 4
 
 [node name="TileMapPlantLayer2" type="TileMapLayer" parent="UICanvasLayer/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="UICanvasLayer/SubViewportContainer/SubViewport"]
 
