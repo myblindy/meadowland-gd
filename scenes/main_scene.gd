@@ -33,11 +33,6 @@ func _ready() -> void:
 
 	print("Map generation complete")
 
-func _process(delta: float) -> void:
-	# _sub_viewport_camera.global_transform = _camera.global_transform
-	# _sub_viewport_camera.zoom = _camera.zoom
-	pass
-
 var _bodies := [
 	load("res://pawns/parts/body/slim_body.tscn"),
 	load("res://pawns/parts/body/fat_body.tscn"),

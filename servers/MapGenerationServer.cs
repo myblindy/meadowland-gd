@@ -215,7 +215,7 @@ public partial class MapGenerationServer : GodotObject
                                 plantLayer.SetCell(new(x, y), plantTileSourceId, plantTileId);
 
                                 // second plant layer
-                                if(tileIds.TryGetValue((plantImage, 1), out var plantTileId2))
+                                if (tileIds.TryGetValue((plantImage, 1), out var plantTileId2))
                                     plantLayer2.SetCell(new(x, y - 1), plantTileSourceId, plantTileId2);
 
                                 break;

@@ -10,11 +10,14 @@
 shader = ExtResource("4_gubc5")
 
 [node name="MainScene" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_pw63i")
 
 [node name="TileMapGroundLayer" type="TileMapLayer" parent="."]
 
 [node name="TileMapPlantLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+y_sort_origin = 16
 
 [node name="TileMapMiningLayer" type="TileMapLayer" parent="."]
 position = Vector2(-248, -70)
