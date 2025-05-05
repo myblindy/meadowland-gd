@@ -148,6 +148,15 @@ public partial class MapGenerationServer : GodotObject
         }
     }
 
+    SimpleAutoTilerHelper? simpleAutoTilerHelper;
+    public void InitializeMiningTileSet(TileMapLayer miningLayer)
+    {
+        using(DurationLogger.LogDuration("Learning mining tileset"))
+        {
+            simpleAutoTilerHelper = new(miningLayer.TileSet);
+        }
+    }
+
     record struct Wave(FastNoiseLite Noise, float Amplitude);
     public Vector2I GenerateMap(
         TileMapLayer groundLayer, TileMapLayer plantLayer, TileMapLayer plantLayer2, TileMapLayer miningLayer,
@@ -166,7 +175,7 @@ public partial class MapGenerationServer : GodotObject
 
         rebuild:
             var cells = new Biome[width, height];
-            var miningCells = new Godot.Collections.Array<Vector2I>();
+            var miningCells = new List<(Vector2I Position, int SourceId)>();
 
             using (DurationLogger.LogDuration("Generating map biomes and setting ground and plant tilemaps"))
             {
@@ -218,14 +227,14 @@ public partial class MapGenerationServer : GodotObject
                         // retain the mining resources to spawn when we know them all
                         if (biome.SpawnMines)
                         {
-                            miningCells.Add(new(x, y));
+                            miningCells.Add((new(x, y), 0));
                         }
                     }
             }
 
             // spawn mining resources
             using(DurationLogger.LogDuration("Setting mining resource tilemap"))
-                miningLayer.SetCellsTerrainConnect(miningCells, 0, 0);
+                simpleAutoTilerHelper!.SetCellsConnectedSimple(miningLayer, miningCells);
 
             // and center the layers
             groundLayer.Position = plantLayer.Position = miningLayer.Position = plantLayer2.Position =

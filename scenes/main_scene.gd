@@ -3,7 +3,9 @@ extends Node2D
 func _ready() -> void:
 	GameStateServer.map_generation_server.InitializeGroundTileSet($TileMapGroundLayer)
 	GameStateServer.map_generation_server.InitializePlantTileSet($TileMapPlantLayer, %TileMapPlantLayer2)
-	var map_size := Vector2i(400, 400)
+	GameStateServer.map_generation_server.InitializeMiningTileSet($TileMapMiningLayer)
+	
+	var map_size := Vector2i(800, 800)
 	var starting_location := GameStateServer.map_generation_server.GenerateMap(
 		$TileMapGroundLayer, $TileMapPlantLayer, %TileMapPlantLayer2, $TileMapMiningLayer,
 		map_size.x, map_size.y,
