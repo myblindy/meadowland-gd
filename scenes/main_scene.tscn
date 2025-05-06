@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main_scene_build_panel.gd" id="1_w2twt"]
 [ext_resource type="TileSet" uid="uid://ccj0cetq68ngx" path="res://resources/game_mining_tileset_resource.tres" id="2_pu3yx"]
-[ext_resource type="Script" uid="uid://domuhsksyf45b" path="res://scenes/camera.gd" id="3_7ykc4"]
+[ext_resource type="Script" uid="uid://domuhsksyf45b" path="res://scenes/main_scene_camera.gd" id="3_7ykc4"]
 [ext_resource type="Shader" uid="uid://b6xuoksvhikww" path="res://textures/shaders/tree_sway_shader.gdshader" id="3_rt2n2"]
 [ext_resource type="Texture2D" uid="uid://btddrviw2hv3q" path="res://textures/shaders/tree_sway_shader_noise_texture.tres" id="4_c16ls"]
 
