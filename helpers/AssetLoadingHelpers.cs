@@ -25,12 +25,12 @@ internal static class AssetLoadingHelpers
         }
     }
 
-    public static void PackTileImagesIntoAtlasImage(
-        IList<Image> tileImages, in Vector2I tileSize,
+    public static void PackTileImagesIntoAtlasImage(IList<Image> tileImages, in Vector2I tileSize,
         Vector2I? atlasImageSize, in Image.Format atlasImageFormat, out Image atlasImage,
-        Action<Image, Image, int, int, int> processAddedTileImage)
+        Action<Image, Image, int, int, int> processAddedTileImage, Vector2I? separation = default)
     {
         const int maxAtlasWidth = 1024;
+        separation ??= new(1, 1);
         int x = 0, y = 0, tileX = 0, tileY = 0;
 
         if (atlasImageSize is null)
@@ -51,8 +51,8 @@ internal static class AssetLoadingHelpers
             // add the 1px padding
             atlasImageSize = atlasImageSize.Value with
             {
-                X = atlasImageSize.Value.X / tileSize.X * (tileSize.X + 1),
-                Y = atlasImageSize.Value.Y / tileSize.Y * (tileSize.Y + 1),
+                X = atlasImageSize.Value.X / tileSize.X * (tileSize.X + separation.Value.X),
+                Y = atlasImageSize.Value.Y / tileSize.Y * (tileSize.Y + separation.Value.Y),
             };
         }
         atlasImage = Image.CreateEmpty(atlasImageSize.Value.X, atlasImageSize.Value.Y, true, atlasImageFormat);
@@ -92,14 +92,14 @@ internal static class AssetLoadingHelpers
                 processAddedTileImage(sourceImage, tileImage, index, tileX, tileY);
 
                 // advance
-                if (x + tileSize.X + 1 + tileSize.X >= atlasImage.GetWidth())
+                if (x + tileSize.X + separation.Value.X + tileSize.X >= atlasImage.GetWidth())
                 {
                     x = 0; tileX = 0;
-                    y += tileSize.Y + 1; ++tileY;
+                    y += tileSize.Y + separation.Value.X; ++tileY;
                 }
                 else
                 {
-                    x += tileSize.X + 1; ++tileX;
+                    x += tileSize.X + separation.Value.X; ++tileX;
                 }
             }
         }

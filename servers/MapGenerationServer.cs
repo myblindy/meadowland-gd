@@ -121,11 +121,12 @@ public partial class MapGenerationServer : GodotObject
             Vector2I internalTileSize = new(64, 64);
 
             // create one image with all the tile textures
+            Vector2I separation = new(50, 1);   // separation for the swaying shader
             var atlas = new TileSetAtlasSource
             {
                 TextureRegionSize = internalTileSize,
                 Margins = default,
-                Separation = new(1, 1),
+                Separation = separation,
                 UseTexturePadding = false,
             };
 
@@ -133,7 +134,8 @@ public partial class MapGenerationServer : GodotObject
             AssetLoadingHelpers.PackTileImagesIntoAtlasImage(
                 [.. plants.SelectMany(p => p.SpriteImages)],
                 internalTileSize, null, Image.Format.Rgba8, out var image,
-                (sourceTileImage, tileImage, index, tileX, tileY) => tilePositions.Add(tileIds[(sourceTileImage, index)] = new(tileX, tileY)));
+                (sourceTileImage, tileImage, index, tileX, tileY) => tilePositions.Add(tileIds[(sourceTileImage, index)] = new(tileX, tileY)),
+                separation);
 
             atlas.Texture = ImageTexture.CreateFromImage(image);
             foreach (var tilePosition in tilePositions)

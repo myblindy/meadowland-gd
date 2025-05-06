@@ -5,7 +5,7 @@ func _ready() -> void:
 	GameStateServer.map_generation_server.InitializePlantTileSet($TileMapPlantLayer, %TileMapPlantLayer2)
 	GameStateServer.map_generation_server.InitializeMiningTileSet($TileMapMiningLayer)
 	
-	var map_size := Vector2i(800, 800)
+	var map_size := Vector2i(600, 600)
 	var starting_location := GameStateServer.map_generation_server.GenerateMap(
 		$TileMapGroundLayer, $TileMapPlantLayer, %TileMapPlantLayer2, $TileMapMiningLayer,
 		map_size.x, map_size.y,
@@ -28,6 +28,8 @@ func _ready() -> void:
 		_create_random_at_position(pawn_position)
 
 	print("Map generation complete")
+	
+	_on_calm_weather_button_pressed()
 
 var _bodies := [
 	load("res://pawns/parts/body/slim_body.tscn"),
@@ -77,3 +79,18 @@ func _create_random_at_position(pawn_position: Vector2) -> BaseBody:
 	body.scale = Vector2(0.25, 0.25)
 
 	return body
+
+func _on_calm_weather_button_pressed() -> void:
+	$TileMapPlantLayer2.material.set_shader_parameter("median_direction", 0.0)
+	$TileMapPlantLayer2.material.set_shader_parameter("sway_strength", 0.005)
+	$TileMapPlantLayer2.material.set_shader_parameter("speed", 0.04)
+
+func _on_windy_left_button_pressed() -> void:
+	$TileMapPlantLayer2.material.set_shader_parameter("median_direction", -0.02)
+	$TileMapPlantLayer2.material.set_shader_parameter("sway_strength", 0.016)
+	$TileMapPlantLayer2.material.set_shader_parameter("speed", 0.2)
+
+func _on_windy_right_button_pressed() -> void:
+	$TileMapPlantLayer2.material.set_shader_parameter("median_direction", 0.02)
+	$TileMapPlantLayer2.material.set_shader_parameter("sway_strength", 0.016)
+	$TileMapPlantLayer2.material.set_shader_parameter("speed", 0.2)
