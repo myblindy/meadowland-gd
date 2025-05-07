@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://wk5uio83oxq7"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://wk5uio83oxq7"]
 
 [ext_resource type="FontFile" uid="uid://c2tulh4a74a8d" path="res://themes/Oldenburg-Regular.ttf" id="1_rjgu6"]
 [ext_resource type="Texture2D" uid="uid://d3n78kctrg05d" path="res://textures/gui/buttonLong_brown.png" id="1_vu6l5"]
@@ -43,6 +43,42 @@ texture_margin_bottom = 12.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uobgu"]
+texture = ExtResource("1_vu6l5")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_puucq"]
+texture = ExtResource("1_vu6l5")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s5e0q"]
+texture = ExtResource("2_ydht1")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1mjdo"]
+texture = ExtResource("2_ydht1")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
 [resource]
 default_font = ExtResource("1_rjgu6")
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -67,3 +103,7 @@ Button/styles/focus = SubResource("StyleBoxEmpty_ydht1")
 Button/styles/hover = SubResource("StyleBoxTexture_g21io")
 Button/styles/normal = SubResource("StyleBoxTexture_ydht1")
 Button/styles/pressed = SubResource("StyleBoxTexture_8gw6x")
+CheckButton/styles/focus = SubResource("StyleBoxTexture_uobgu")
+CheckButton/styles/hover = SubResource("StyleBoxTexture_puucq")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxTexture_s5e0q")
+CheckButton/styles/pressed = SubResource("StyleBoxTexture_1mjdo")
