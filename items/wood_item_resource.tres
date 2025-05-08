@@ -8,4 +8,6 @@ script = ExtResource("1_fnndm")
 name = "Wood"
 icon_texture = ExtResource("1_4h7y8")
 weight = 2.0
+pickup_speed_multiplier = 1.0
+placeable = false
 metadata/_custom_type_script = "uid://dsrutk0n2h146"

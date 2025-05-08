@@ -20,11 +20,11 @@ func _ready() -> void:
 			MapGenerationWaveResource.new(randi(), 0.002, 1.0),
 			MapGenerationWaveResource.new(randi(), 0.001, 0.5),
 		])
-	$Camera2D.position = (starting_location - map_size / 2) * GameStateServer.map_generation_server.TileSize
+	$Camera2D.position = starting_location * GameStateServer.map_generation_server.TileSize
 
 	# generate pawns around the starting location
 	for idx in range(5):
-		var pawn_position := starting_location - map_size / 2 + Vector2i(randi_range(-10, 10), randi_range(-10, 10))
+		var pawn_position := GameStateServer.terrain_server.GetReachablePositionInRange(starting_location, 5)
 		_create_random_at_position(pawn_position)
 
 	print("Map generation complete")

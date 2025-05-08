@@ -32,4 +32,5 @@ min_moisture = 0.6
 min_heat = 0.3
 plants = Array[ExtResource("1_lp022")]([SubResource("Resource_kid8k")])
 spawn_mines = false
+is_water = false
 metadata/_custom_type_script = "uid://op5i02bjrc1y"

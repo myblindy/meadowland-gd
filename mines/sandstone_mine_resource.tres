@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GameMineResource" load_steps=2 format=3 uid="uid://d2mohvosxw48d"]
+
+[ext_resource type="Script" uid="uid://crqrny7mmhxp6" path="res://resources/game_mine_resource.gd" id="1_1vc2b"]
+
+[resource]
+script = ExtResource("1_1vc2b")
+name = "Sandstone"
+metadata/_custom_type_script = "uid://crqrny7mmhxp6"

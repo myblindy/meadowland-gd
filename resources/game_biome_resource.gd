@@ -8,3 +8,4 @@ class_name GameBiomeResource extends Resource
 @export var min_heat: float
 @export var plants: Array[GameBiomePlantChanceResource]
 @export var spawn_mines: bool
+@export var is_water: bool

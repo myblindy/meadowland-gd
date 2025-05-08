@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 
 [GlobalClass]
@@ -10,7 +12,7 @@ public partial class MapGenerationServer : GodotObject
     readonly record struct Plant(string Name, Image[] SpriteImages);
 
     readonly record struct PlantSpawnChance(Plant Plant, float ChancePercentage);
-    readonly record struct Biome(string Name, bool Passable, bool SpawnMines,
+    readonly record struct Biome(string Name, bool IsPassable, bool IsWater, bool SpawnMines,
         double Height, double Moisture, double Heat, Image[] Images,
         PlantSpawnChance[] PlantSpawnChances)
     {
@@ -18,69 +20,77 @@ public partial class MapGenerationServer : GodotObject
             height >= Height && moisture >= Moisture && heat >= Heat;
 
         public double GetDifferenceFromPoint(double height, double moisture, double heat) =>
-            (height - Height) + (moisture - Moisture) + (heat - Heat);
+            height - Height + moisture - Moisture + heat - Heat;
     }
 
-    static readonly Biome[] biomes;
-    static readonly Plant[] plants;
-    static readonly Dictionary<(Image image, int index), Vector2I> tileIds = [];
-    static int groundTileSourceId, plantTileSourceId, plantTileSource2Id;
-    static readonly Vector2I tileSize = new(32, 32);
-    static MapGenerationServer()
+    readonly Biome[] biomes;
+    readonly Plant[] plants;
+    readonly Dictionary<(Image image, int index), Vector2I> tileIds = [];
+    int groundTileSourceId, plantTileSourceId;
+    readonly Vector2I tileSize = new(32, 32);
+
+    public MapGenerationServer()
     {
         // plants
-        const string plantPath = "res://plants/";
-        var plantFiles = AssetLoadingHelpers.EnumerateAssets(plantPath, ".tres").ToArray();
-        plants = new Plant[plantFiles.Length];
-
-        int plantIndex = 0;
-        foreach (var plantFile in plantFiles)
+        using (DurationLogger.LogDuration("Loading plants"))
         {
-            var plant = GD.Load<Resource>(plantPath + plantFile);
-            plants[plantIndex++] = new Plant(
-                plant.Get("name").AsString(),
-                plant.Get("sprite_textures").AsGodotObjectArray<Image>());
+            const string plantPath = "res://plants/";
+            var plantFiles = AssetLoadingHelpers.EnumerateAssets(plantPath, ".tres").ToArray();
+            plants = new Plant[plantFiles.Length];
+
+            int plantIndex = 0;
+            foreach (var plantFile in plantFiles)
+            {
+                var plant = GD.Load<Resource>(plantPath + plantFile);
+                plants[plantIndex++] = new Plant(
+                    plant.Get("name").AsString(),
+                    plant.Get("sprite_textures").AsGodotObjectArray<Image>());
+            }
+            GD.Print($"Loaded {plantFiles.Length} plants with {plants.Sum(p => p.SpriteImages.Length)} textures");
         }
-        GD.Print($"Loaded {plantFiles.Length} plants with {plants.Sum(p => p.SpriteImages.Length)} textures");
 
         // biomes
-        const string biomePath = "res://biomes/";
-        var biomeFiles = AssetLoadingHelpers.EnumerateAssets(biomePath, ".tres").ToArray();
-        biomes = new Biome[biomeFiles.Length];
-
-        int biomeIndex = 0;
-        foreach (var biomeFile in biomeFiles)
+        using (DurationLogger.LogDuration("Loading biomes"))
         {
-            var biome = GD.Load<Resource>(biomePath + biomeFile);
+            const string biomePath = "res://biomes/";
+            var biomeFiles = AssetLoadingHelpers.EnumerateAssets(biomePath, ".tres").ToArray();
+            biomes = new Biome[biomeFiles.Length];
 
-            var tilesetImages = biome.Get("tileset").AsGodotObjectArray<Image>();
-
-            var plantSpawnChances = biome.Get("plants").AsGodotObjectArray<Resource>()
-                .Select(plantSpawnChance =>
-                {
-                    var plantName = plantSpawnChance.Get("plant").As<Resource>().Get("name").AsString();
-                    return new PlantSpawnChance(
-                        plants.Single(p => p.Name == plantName),
-                        plantSpawnChance.Get("chance_percentage").AsSingle());
-                })
-                .ToArray();
-            if (plantSpawnChances.Sum(w => w.ChancePercentage) is { } totalChancePercentage && totalChancePercentage > 1)
+            int biomeIndex = 0;
+            foreach (var biomeFile in biomeFiles)
             {
-                // normalize the chances
-                plantSpawnChances = [.. plantSpawnChances.Select(w =>
-                    new PlantSpawnChance(w.Plant, w.ChancePercentage / totalChancePercentage))];
-            }
+                var biome = GD.Load<Resource>(biomePath + biomeFile);
 
-            biomes[biomeIndex++] = new Biome(
-                biome.Get("name").AsString(),
-                biome.Get("movement_modifier").AsSingle() > 0,
-                biome.Get("spawn_mines").AsBool(),
-                biome.Get("min_height").AsSingle(),
-                biome.Get("min_moisture").AsSingle(),
-                biome.Get("min_heat").AsSingle(),
-                tilesetImages, plantSpawnChances);
+                var tilesetImages = biome.Get("tileset").AsGodotObjectArray<Image>();
+
+                var plantSpawnChances = biome.Get("plants").AsGodotObjectArray<Resource>()
+                    .Select(plantSpawnChance =>
+                    {
+                        var plantName = plantSpawnChance.Get("plant").As<Resource>().Get("name").AsString();
+                        return new PlantSpawnChance(
+                            plants.Single(p => p.Name == plantName),
+                            plantSpawnChance.Get("chance_percentage").AsSingle());
+                    })
+                    .ToArray();
+                if (plantSpawnChances.Sum(w => w.ChancePercentage) is { } totalChancePercentage && totalChancePercentage > 1)
+                {
+                    // normalize the chances
+                    plantSpawnChances = [.. plantSpawnChances.Select(w =>
+                    new PlantSpawnChance(w.Plant, w.ChancePercentage / totalChancePercentage))];
+                }
+
+                biomes[biomeIndex++] = new Biome(
+                    biome.Get("name").AsString(),
+                    biome.Get("movement_modifier").AsSingle() > 0,
+                    biome.Get("is_water").AsBool(),
+                    biome.Get("spawn_mines").AsBool(),
+                    biome.Get("min_height").AsSingle(),
+                    biome.Get("min_moisture").AsSingle(),
+                    biome.Get("min_heat").AsSingle(),
+                    tilesetImages, plantSpawnChances);
+            }
+            GD.Print($"Loaded {biomeFiles.Length} biomes with {biomes.Sum(b => b.Images.Length)} textures");
         }
-        GD.Print($"Loaded {biomeFiles.Length} biomes with {biomes.Sum(b => b.Images.Length)} textures");
     }
 
     public Vector2I TileSize => tileSize;
@@ -146,17 +156,14 @@ public partial class MapGenerationServer : GodotObject
             plantTileSourceId = plantLayer.TileSet.GetSourceId(0);
 
             plantLayer2.TileSet = plantLayer.TileSet;
-            plantTileSource2Id = plantLayer2.TileSet.GetSourceId(0);
         }
     }
 
     SimpleAutoTilerHelper? simpleAutoTilerHelper;
     public void InitializeMiningTileSet(TileMapLayer miningLayer)
     {
-        using(DurationLogger.LogDuration("Learning mining tileset"))
-        {
+        using (DurationLogger.LogDuration("Learning mining tileset"))
             simpleAutoTilerHelper = new(miningLayer.TileSet);
-        }
     }
 
     record struct Wave(FastNoiseLite Noise, float Amplitude);
@@ -166,6 +173,10 @@ public partial class MapGenerationServer : GodotObject
     {
         using (DurationLogger.LogDuration("Map generation"))
         {
+            var gameResourcesServer = GameResourcesServer.Instance;
+            var terrainServer = TerrainServer.Instance;
+            terrainServer.Initialize(width, height);
+
             groundLayer.Clear();
             plantLayer.Clear();
             miningLayer.Clear();
@@ -174,6 +185,22 @@ public partial class MapGenerationServer : GodotObject
             var heightWaves = toInternalWaves(_heightWaves);
             var moistureWaves = toInternalWaves(_moistureWaves);
             var heatWaves = toInternalWaves(_heatWaves);
+
+            (float height, float moisture, float heat)[] noiseValues = new (float, float, float)[width * height];
+            Partitioner.Create(0, width * height)
+                .AsParallel()
+                .ForAll(partition =>
+                {
+                    for (int i = partition.Item1; i < partition.Item2; ++i)
+                    {
+                        var (x, y) = (i % width, i / width);
+
+                        noiseValues[i] = (
+                            GenerateNoiseValue(x, y, heightWaves),
+                            GenerateNoiseValue(x, y, moistureWaves),
+                            GenerateNoiseValue(x, y, heatWaves));
+                    }
+                });
 
         rebuild:
             var cells = new Biome[width, height];
@@ -184,9 +211,7 @@ public partial class MapGenerationServer : GodotObject
                 for (int y = 0; y < height; ++y)
                     for (int x = 0; x < width; ++x)
                     {
-                        var heightValue = GenerateNoiseValue(x, y, heightWaves);
-                        var moistureValue = GenerateNoiseValue(x, y, moistureWaves);
-                        var heatValue = GenerateNoiseValue(x, y, heatWaves);
+                        var (heightValue, moistureValue, heatValue) = noiseValues[x + y * width];
 
                         var bestBiomeIndex = 0;
                         var bestBiomeError = double.MaxValue;
@@ -201,6 +226,7 @@ public partial class MapGenerationServer : GodotObject
                         var cellTexture = biomes[bestBiomeIndex].Images[GD.Randi() % biomes[bestBiomeIndex].Images.Length];
                         groundLayer.SetCell(new(x, y), groundTileSourceId, tileIds[(cellTexture, 0)]);
                         var biome = cells[x, y] = biomes[bestBiomeIndex];
+                        terrainServer.SetWater(x, y, biome.IsWater);
 
                         // spawn plants
                         if (biome.PlantSpawnChances.Length > 0)
@@ -229,20 +255,18 @@ public partial class MapGenerationServer : GodotObject
                         // retain the mining resources to spawn when we know them all
                         if (biome.SpawnMines)
                         {
+                            // TODO: different mines
                             miningCells.Add((new(x, y), 0));
+                            terrainServer.SetMine(x, y, gameResourcesServer.GetMineResource("Sandstone"));
                         }
                     }
             }
 
             // spawn mining resources
-            using(DurationLogger.LogDuration("Setting mining resource tilemap"))
+            using (DurationLogger.LogDuration("Setting mining resource tilemap"))
                 simpleAutoTilerHelper!.SetCellsConnectedSimple(miningLayer, miningCells);
 
-            // and center the layers
-            groundLayer.Position = plantLayer.Position = miningLayer.Position = plantLayer2.Position =
-                -new Vector2(width, height) / 2 * tileSize;
-
-            using(DurationLogger.LogDuration("Finding the starting location"))
+            using (DurationLogger.LogDuration("Finding the starting location"))
                 if (FindLargestStartingLocation() is { } startingLocation)
                 {
                     GD.Print($"Found starting location at: {startingLocation}");
@@ -285,7 +309,7 @@ public partial class MapGenerationServer : GodotObject
                 {
                     for (int x = 0; x < width; ++x)
                     {
-                        if (visited[x, y] || !cells[x, y].Passable || cells[x, y].SpawnMines)
+                        if (visited[x, y] || !cells[x, y].IsPassable || cells[x, y].SpawnMines)
                             continue;
 
                         var openCells = new Stack<Vector2I>();
@@ -304,7 +328,7 @@ public partial class MapGenerationServer : GodotObject
                                 if (neighbor.X < 0 || neighbor.X >= width
                                     || neighbor.Y < 0 || neighbor.Y >= height
                                     || visited[neighbor.X, neighbor.Y]
-                                    || !cells[neighbor.X, neighbor.Y].Passable)
+                                    || !cells[neighbor.X, neighbor.Y].IsPassable)
                                     continue;
 
                                 visited[neighbor.X, neighbor.Y] = true;
