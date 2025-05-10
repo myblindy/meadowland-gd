@@ -17,14 +17,16 @@ public partial class Pawn : Node2D
             if (value != oldValue)
             {
                 // save and remove the current hat and coat
-                var (hat, coat) = (oldValue?.Get("hat").As<Node2D?>(), oldValue?.Get("coat").As<Node2D?>());
+                var (eyes, hat, coat) = (Eyes, Hat, Coat);
                 oldValue?.Set("hat", default);
                 oldValue?.Set("coat", default);
+                oldValue?.Set("eyes", default);
 
                 while (GetChildCount() > 0)
                     RemoveChild(GetChild(0));
                 AddChild(value);
 
+                value?.Set("eyes", eyes);
                 value?.Set("hat", hat);
                 value?.Set("coat", coat);
             }
