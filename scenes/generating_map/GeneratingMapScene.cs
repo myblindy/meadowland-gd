@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 public partial class GeneratingMapScene : Node2D
 {
     public Vector2I MapSize { get; set; }
+    public Node2D[] Characters { get; set; } = [];
 
     public override async void _Ready()
     {
@@ -38,40 +39,13 @@ public partial class GeneratingMapScene : Node2D
 
             mainScene.GetNode<Camera2D>("Camera2D").Position = startingLocation * MapGenerationServer.Instance.TileSize;
 
-            // generate the pawns around the starting location
-            for (int i = 0; i < 5; ++i)
-                CreateRandomPawnAtPosition(TerrainServer.Instance.GetReachablePositionInRange(startingLocation, 5));
-
-            static Node2D CreateRandomPawnAtPosition(Vector2I pawnPosition)
+            // add the pawns around the starting location
+            foreach(var character in Characters)
             {
-                var body = bodies[GD.Randi() % bodies.Length].Instantiate<Node2D>();
-
-                // skin
-                body.Set("skin", new Color(GD.Randf(), GD.Randf(), GD.Randf()));
-
-                // hat
-                var coatScene = coats[GD.Randi() % coats.Length];
-                if (coatScene is not null)
-                {
-                    var coat = coatScene.Instantiate<Node2D>();
-                    coat.Set("color", new Color(GD.Randf(), GD.Randf(), GD.Randf()));
-                    body.Set("coat", coat);
-                }
-                else
-                    body.Set("coat", default);
-
-                // hat
-                var hatScene = hats[GD.Randi() % hats.Length];
-                if (hatScene is not null)
-                {
-                    var hat = hatScene.Instantiate<Node2D>();
-                    hat.Set("color", new Color(GD.Randf(), GD.Randf(), GD.Randf()));
-                    body.Set("hat", hat);
-                }
-                else
-                    body.Set("hat", default);
-
-                return body;
+                character.Position = TerrainServer.Instance.GetReachablePositionInRange(startingLocation, 5)
+                    * MapGenerationServer.Instance.TileSize;
+                character.Scale = new Vector2(0.25f, 0.25f);
+                mainScene.GetNode<Node2D>("PawnRoot").AddChild(character);
             }
         });
 
@@ -79,21 +53,4 @@ public partial class GeneratingMapScene : Node2D
         GetTree().Root.AddChild(mainScene);
         QueueFree();
     }
-
-    static readonly PackedScene[] bodies = [
-        GD.Load<PackedScene>("res://pawns/parts/body/slim_body.tscn"),
-        GD.Load<PackedScene>("res://pawns/parts/body/fat_body.tscn"),
-        ];
-
-    static readonly PackedScene?[] coats = [
-        null,
-        GD.Load<PackedScene>("res://pawns/parts/coats/pauldrons_coat.tscn"),
-        GD.Load<PackedScene>("res://pawns/parts/coats/jacket_coat.tscn"),
-        ];
-
-    static readonly PackedScene?[] hats = [
-        null,
-        GD.Load<PackedScene>("res://pawns/parts/hat/beanie_hat.tscn"),
-        GD.Load<PackedScene>("res://pawns/parts/hat/warm_hat.tscn"),
-        ];
 }

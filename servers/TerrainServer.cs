@@ -50,18 +50,18 @@ public partial class TerrainServer : GodotObject
 
     public bool IsPassable(int x, int y) => cells[x, y].Passable;
 
-    public Vector2I GetReachablePositionInRange(Vector2I center, int range)
+    public Vector2I GetReachablePositionInRange(Vector2 center, int range)
     {
-        if (!IsPassable(center.X, center.Y))
+        if (!IsPassable((int)center.X, (int)center.Y))
             return Vector2I.MinValue;
 
         var aStar = new PathFinder(aStarWorldGrid, pathFinderOptions);
 
         while (true)
         {
-            var destination = center + new Vector2I(GD.RandRange(-range, range), GD.RandRange(-range, range));
+            var destination = (Vector2I)center + new Vector2I(GD.RandRange(-range, range), GD.RandRange(-range, range));
             if (IsPassable(destination.X, destination.Y))
-                if (aStar.FindPath(new Position(center.X, center.Y), new Position(destination.X, destination.Y)) is { Length: > 0 })
+                if (aStar.FindPath(new Position((int)center.X, (int)center.Y), new Position(destination.X, destination.Y)) is { Length: > 0 })
                     return destination;
         }
     }

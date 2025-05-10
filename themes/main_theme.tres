@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://wk5uio83oxq7"]
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://wk5uio83oxq7"]
 
 [ext_resource type="FontFile" uid="uid://c2tulh4a74a8d" path="res://themes/Oldenburg-Regular.ttf" id="1_rjgu6"]
 [ext_resource type="Texture2D" uid="uid://d3n78kctrg05d" path="res://textures/gui/buttonLong_brown.png" id="1_vu6l5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b0xsimawc8o6k" path="res://textures/gui/panel_brown.png" id="3_8gw6x"]
 [ext_resource type="Texture2D" uid="uid://cr08eyh86dgx" path="res://textures/gui/checkbox_beige_cross.svg" id="3_s5e0q"]
 [ext_resource type="Texture2D" uid="uid://dsm7x4263t6ui" path="res://textures/gui/checkbox_beige_checked.svg" id="4_puucq"]
+[ext_resource type="Texture2D" uid="uid://j45xxh6iy0lw" path="res://textures/gui/panelInset_beige.png" id="5_0x86e"]
 [ext_resource type="Texture2D" uid="uid://s2r71wbr4c01" path="res://textures/gui/checkbox_grey_checked.svg" id="5_1mjdo"]
 [ext_resource type="Texture2D" uid="uid://cmubjai6li3pm" path="res://textures/gui/checkbox_beige_empty.svg" id="6_s5e0q"]
 [ext_resource type="Texture2D" uid="uid://wwhkv6rdgr6x" path="res://textures/gui/checkbox_grey_empty.svg" id="7_0x86e"]
@@ -86,6 +87,19 @@ texture_margin_bottom = 12.0
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qy2x"]
+texture = ExtResource("5_0x86e")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0x86e"]
 texture = ExtResource("3_8gw6x")
 texture_margin_left = 12.0
@@ -142,6 +156,8 @@ CheckButton/styles/focus = SubResource("StyleBoxTexture_uobgu")
 CheckButton/styles/hover = SubResource("StyleBoxTexture_puucq")
 CheckButton/styles/hover_pressed = SubResource("StyleBoxTexture_s5e0q")
 CheckButton/styles/pressed = SubResource("StyleBoxTexture_1mjdo")
+InsetPanelContainer/base_type = &"PanelContainer"
+InsetPanelContainer/styles/panel = SubResource("StyleBoxTexture_7qy2x")
 Label/constants/outline_size = 7
 OptionButton/constants/arrow_margin = 10
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_0x86e")

@@ -4,6 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://c6uo1c1ii8uf3" path="res://scenes/generating_map/stone-pile.svg" id="2_0vr45"]
 [ext_resource type="Texture2D" uid="uid://c13ptthc2rlsx" path="res://scenes/generating_map/war-pick.svg" id="3_bjsu4"]
 
+[sub_resource type="Animation" id="Animation_pxpv2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WarPickRoot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0331613]
+}
+
 [sub_resource type="Animation" id="Animation_bjsu4"]
 resource_name = "loading_animation"
 length = 1.5
@@ -31,21 +46,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(9.1896, 2, 4, 2, 1),
 "update": 0,
 "values": [Vector2(212, -156), Vector2(212, -156), Vector2(139.54, -121.85), Vector2(139.54, -121.85), Vector2(212, -156)]
-}
-
-[sub_resource type="Animation" id="Animation_pxpv2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WarPickRoot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0331613]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pxpv2"]
