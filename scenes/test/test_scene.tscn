@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://br0rr3hhnsyjr"]
 
-[ext_resource type="Script" uid="uid://dkp0wfk2vd7lp" path="res://scenes/test_scene.gd" id="1_7ddre"]
+[ext_resource type="Script" uid="uid://dkp0wfk2vd7lp" path="res://scenes/test/test_scene.gd" id="1_7ddre"]
 [ext_resource type="Shader" uid="uid://b6xuoksvhikww" path="res://textures/shaders/tree_sway_shader.gdshader" id="2_nd71p"]
-[ext_resource type="Texture2D" uid="uid://7ohk2jai710s" path="res://scenes/pine_01.svg" id="3_7ddre"]
+[ext_resource type="Texture2D" uid="uid://7ohk2jai710s" path="res://scenes/test/pine_01.svg" id="3_7ddre"]
 [ext_resource type="Texture2D" uid="uid://btddrviw2hv3q" path="res://textures/shaders/tree_sway_shader_noise_texture.tres" id="4_7ddre"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3qnke"]

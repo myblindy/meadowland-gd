@@ -20,13 +20,13 @@
 [sub_resource type="Resource" id="Resource_nuxsq"]
 script = ExtResource("1_j8jdv")
 plant = ExtResource("2_otcmb")
-chance_percentage = 0.5
+chance_percentage = 0.4
 metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 
 [sub_resource type="Resource" id="Resource_v7jq2"]
 script = ExtResource("1_j8jdv")
 plant = ExtResource("3_j8a5h")
-chance_percentage = 0.3
+chance_percentage = 0.2
 metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 
 [resource]

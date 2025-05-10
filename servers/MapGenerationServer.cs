@@ -29,8 +29,13 @@ public partial class MapGenerationServer : GodotObject
     int groundTileSourceId, plantTileSourceId;
     readonly Vector2I tileSize = new(32, 32);
 
+    public static MapGenerationServer Instance { get; private set; } = null!;
+
     public MapGenerationServer()
     {
+        Debug.Assert(Instance is null);
+        Instance = this;
+
         // plants
         using (DurationLogger.LogDuration("Loading plants"))
         {
@@ -112,7 +117,7 @@ public partial class MapGenerationServer : GodotObject
             AssetLoadingHelpers.PackTileImagesIntoAtlasImage(
                 [.. biomes.SelectMany(p => p.Images)],
                 tileSize, null, Image.Format.Rgb8, out var atlasImage,
-                (sourceTileImage, tileImage, index, tileX, tileY) => tilePositions.Add(tileIds[(sourceTileImage, index)] = new(tileX, tileY)));
+                (sourceTileImage, tileImage, index, tileX, tileY) => { lock (tileIds) tilePositions.Add(tileIds[(sourceTileImage, index)] = new(tileX, tileY)); });
 
             atlas.Texture = ImageTexture.CreateFromImage(atlasImage);
             foreach (var tilePosition in tilePositions)
@@ -144,7 +149,7 @@ public partial class MapGenerationServer : GodotObject
             AssetLoadingHelpers.PackTileImagesIntoAtlasImage(
                 [.. plants.SelectMany(p => p.SpriteImages)],
                 internalTileSize, null, Image.Format.Rgba8, out var image,
-                (sourceTileImage, tileImage, index, tileX, tileY) => tilePositions.Add(tileIds[(sourceTileImage, index)] = new(tileX, tileY)),
+                (sourceTileImage, tileImage, index, tileX, tileY) => { lock (tileIds) tilePositions.Add(tileIds[(sourceTileImage, index)] = new(tileX, tileY)); },
                 separation);
 
             atlas.Texture = ImageTexture.CreateFromImage(image);
@@ -167,15 +172,19 @@ public partial class MapGenerationServer : GodotObject
     }
 
     record struct Wave(FastNoiseLite Noise, float Amplitude);
-    public Vector2I GenerateMap(
-        TileMapLayer groundLayer, TileMapLayer plantLayer, TileMapLayer plantLayer2, TileMapLayer miningLayer,
-        int width, int height, Resource[] _heightWaves, Resource[] _moistureWaves, Resource[] _heatWaves)
+    public Vector2I GenerateMap(Node mainScene, Vector2I mapSize,
+        Vector3[] _heightWaves, Vector3[] _moistureWaves, Vector3[] _heatWaves)
     {
         using (DurationLogger.LogDuration("Map generation"))
         {
+            var groundLayer = mainScene.GetNode<TileMapLayer>("TileMapGroundLayer");
+            var plantLayer = mainScene.GetNode<TileMapLayer>("TileMapPlantLayer");
+            var plantLayer2 = mainScene.GetNode<TileMapLayer>("TileMapPlantLayer2");
+            var miningLayer = mainScene.GetNode<TileMapLayer>("TileMapMiningLayer");
+
             var gameResourcesServer = GameResourcesServer.Instance;
             var terrainServer = TerrainServer.Instance;
-            terrainServer.Initialize(width, height);
+            terrainServer.Initialize(mapSize.X, mapSize.Y);
 
             groundLayer.Clear();
             plantLayer.Clear();
@@ -186,14 +195,14 @@ public partial class MapGenerationServer : GodotObject
             var moistureWaves = toInternalWaves(_moistureWaves);
             var heatWaves = toInternalWaves(_heatWaves);
 
-            (float height, float moisture, float heat)[] noiseValues = new (float, float, float)[width * height];
-            Partitioner.Create(0, width * height)
+            (float height, float moisture, float heat)[] noiseValues = new (float, float, float)[mapSize.X * mapSize.Y];
+            Partitioner.Create(0, mapSize.X * mapSize.Y)
                 .AsParallel()
                 .ForAll(partition =>
                 {
                     for (int i = partition.Item1; i < partition.Item2; ++i)
                     {
-                        var (x, y) = (i % width, i / width);
+                        var (x, y) = (i % mapSize.X, i / mapSize.X);
 
                         noiseValues[i] = (
                             GenerateNoiseValue(x, y, heightWaves),
@@ -202,16 +211,16 @@ public partial class MapGenerationServer : GodotObject
                     }
                 });
 
-        rebuild:
-            var cells = new Biome[width, height];
+rebuild:
+            var cells = new Biome[mapSize.X, mapSize.Y];
             var miningCells = new List<(Vector2I Position, int SourceId)>();
 
             using (DurationLogger.LogDuration("Generating map biomes and setting ground and plant tilemaps"))
             {
-                for (int y = 0; y < height; ++y)
-                    for (int x = 0; x < width; ++x)
+                for (int y = 0; y < mapSize.Y; ++y)
+                    for (int x = 0; x < mapSize.X; ++x)
                     {
-                        var (heightValue, moistureValue, heatValue) = noiseValues[x + y * width];
+                        var (heightValue, moistureValue, heatValue) = noiseValues[x + y * mapSize.X];
 
                         var bestBiomeIndex = 0;
                         var bestBiomeError = double.MaxValue;
@@ -276,16 +285,16 @@ public partial class MapGenerationServer : GodotObject
             GD.Print("No suitable starting location found, regenerating map...");
             goto rebuild;
 
-            static Wave[] toInternalWaves(Resource[] resourceWaves) =>
+            static Wave[] toInternalWaves(Vector3[] resourceWaves) =>
                 [.. resourceWaves.Select(w => new Wave(
                 new()
                 {
                     NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth,
-                    Seed = w.Get("wave_seed").AsInt32(),
-                    Frequency = w.Get("frequency").AsSingle(),
+                    Seed = (int)w.X,
+                    Frequency = w.Y,
                     FractalType = FastNoiseLite.FractalTypeEnum.PingPong,
                 },
-                w.Get("amplitude").AsSingle()))];
+                w.Z))];
 
             static float GenerateNoiseValue(int x, int y, Wave[] waves)
             {
@@ -302,12 +311,12 @@ public partial class MapGenerationServer : GodotObject
             Vector2I? FindLargestStartingLocation()
             {
                 // find all connected passable cell biomes
-                var visited = new bool[width, height];
+                var visited = new bool[mapSize.X, mapSize.Y];
                 List<Vector2I>? largestRegionCells = default;
 
-                for (int y = 0; y < height; ++y)
+                for (int y = 0; y < mapSize.Y; ++y)
                 {
-                    for (int x = 0; x < width; ++x)
+                    for (int x = 0; x < mapSize.X; ++x)
                     {
                         if (visited[x, y] || !cells[x, y].IsPassable || cells[x, y].SpawnMines)
                             continue;
@@ -325,8 +334,8 @@ public partial class MapGenerationServer : GodotObject
                                 [new(1, 0), new(-1, 0), new(0, 1), new(0, -1)])
                             {
                                 var neighbor = current + offset;
-                                if (neighbor.X < 0 || neighbor.X >= width
-                                    || neighbor.Y < 0 || neighbor.Y >= height
+                                if (neighbor.X < 0 || neighbor.X >= mapSize.X
+                                    || neighbor.Y < 0 || neighbor.Y >= mapSize.Y
                                     || visited[neighbor.X, neighbor.Y]
                                     || !cells[neighbor.X, neighbor.Y].IsPassable)
                                     continue;

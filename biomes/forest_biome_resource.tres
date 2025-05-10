@@ -19,7 +19,7 @@
 [sub_resource type="Resource" id="Resource_kid8k"]
 script = ExtResource("1_lp022")
 plant = ExtResource("2_0ma44")
-chance_percentage = 0.6
+chance_percentage = 0.5
 metadata/_custom_type_script = "uid://be7fg6nnau3qt"
 
 [resource]

@@ -1,0 +1,136 @@
+[gd_scene load_steps=7 format=3 uid="uid://bb2mc886kn2ut"]
+
+[ext_resource type="Script" uid="uid://2tt5cfwli31f" path="res://scenes/main_menu/main_menu_scene.gd" id="1_7hcs8"]
+[ext_resource type="Texture2D" uid="uid://c2stfd8pji0i2" path="res://textures/background/cloud01.svg" id="2_sb6w7"]
+[ext_resource type="Texture2D" uid="uid://docj80vvitaio" path="res://textures/background/background.png" id="3_yj20m"]
+
+[sub_resource type="Gradient" id="Gradient_l6cm7"]
+colors = PackedColorArray(0.72927, 0.815462, 0.987038, 1, 0.0203352, 0.719, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ekxnf"]
+gradient = SubResource("Gradient_l6cm7")
+fill = 1
+fill_from = Vector2(0.79, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ekxnf"]
+lifetime_randomness = 0.18
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 300, 1)
+spread = 5.0
+initial_velocity_min = 400.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+damping_max = 0.1
+attractor_interaction_enabled = false
+scale_min = 0.2
+scale_max = 0.6
+turbulence_noise_strength = 0.1
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7hcs8")
+
+[node name="SkyRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ekxnf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.729412)
+position = Vector2(-485, 326)
+texture = ExtResource("2_sb6w7")
+lifetime = 5.0
+preprocess = 2.0
+visibility_rect = Rect2(-400.236, -837.146, 3109.43, 1590.84)
+process_material = SubResource("ParticleProcessMaterial_ekxnf")
+
+[node name="TitleRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 230.0
+grow_horizontal = 2
+texture = ExtResource("3_yj20m")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="MarginContainer/PanelContainer/MainMenuContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/PanelContainer/MainMenuContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="NewGameContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/NewGameContainer"]
+layout_mode = 2
+text = "Map Size:"
+
+[node name="SizeOptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/NewGameContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 2
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "Small (200x200)"
+popup/item_0/id = 0
+popup/item_1/text = "Medium (300x300)"
+popup/item_1/id = 1
+popup/item_2/text = "Large (400x400)"
+popup/item_2/id = 2
+popup/item_3/text = "Gigantic (600x600)"
+popup/item_3/id = 3
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/PanelContainer/NewGameContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/NewGameContainer"]
+layout_mode = 2
+
+[node name="StartMapGenerationButton" type="Button" parent="MarginContainer/PanelContainer/NewGameContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/PanelContainer/NewGameContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MainMenuContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MainMenuContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/NewGameContainer/HBoxContainer/StartMapGenerationButton" to="." method="_on_start_map_generation_button_pressed"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/NewGameContainer/HBoxContainer/CancelButton" to="." method="_on_generate_cancel_button_pressed"]

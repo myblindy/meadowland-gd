@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ohk2jai710s"
-path="res://.godot/imported/pine_01.svg-005928f30e4b7f04ad894402ebe26258.ctex"
+uid="uid://c13ptthc2rlsx"
+path="res://.godot/imported/war-pick.svg-f8bcdf203f6e30b593871b049436a5e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/pine_01.svg"
-dest_files=["res://.godot/imported/pine_01.svg-005928f30e4b7f04ad894402ebe26258.ctex"]
+source_file="res://scenes/generating_map/war-pick.svg"
+dest_files=["res://.godot/imported/war-pick.svg-f8bcdf203f6e30b593871b049436a5e2.ctex"]
 
 [params]
 
