@@ -31,6 +31,12 @@ public partial class Pawn : Node2D
         }
     }
 
+    public Node2D? Eyes
+    {
+        get => Body?.Get("eyes").As<Node2D?>();
+        set => Body?.Set("eyes", value);
+    }
+
     public Node2D? Hat
     {
         get => Body?.Get("hat").As<Node2D?>();

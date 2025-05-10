@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dynvauvbeh2yt"]
+
+[ext_resource type="Script" uid="uid://chxco5xe75gla" path="res://pawns/parts/eyes/base_eyes.gd" id="1_gto03"]
+
+[node name="BaseEyes" type="Node2D"]
+script = ExtResource("1_gto03")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -85)

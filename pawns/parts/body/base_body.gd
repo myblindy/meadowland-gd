@@ -1,6 +1,7 @@
 class_name BaseBody extends Node2D
 
 @onready var _sprite: Sprite2D = $Sprite
+@onready var _face_root := $FaceRoot
 @onready var _coat_root := $CoatRoot
 @onready var _hat_root := $HatRoot
 
@@ -39,8 +40,23 @@ var _hat: BaseHat
 			if _hat and _hat_root:
 				_hat_root.add_child(_hat)
 
+var _eyes: BaseEyes
+@export var eyes: BaseEyes:
+	get:
+		return _eyes
+	set(value):
+		if value != _eyes:
+			if _eyes:
+				_eyes.queue_free()
+			_eyes = value
+			if _eyes and _face_root:
+				_face_root.add_child(_eyes)
+				
 func _ready() -> void:
 	_sprite.self_modulate = skin_color
+	
+	if _eyes:
+		_face_root.add_child(_eyes)
 
 	if _coat:
 		_coat_root.add_child(_coat)

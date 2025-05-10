@@ -30,6 +30,15 @@ public partial class CharacterGenerationServer : GodotObject
         // skin
         pawn.Body.Set("skin", new Color(GD.Randf(), GD.Randf(), GD.Randf()));
 
+        // eyes
+        var eyeScene = eyes[GD.Randi() % eyes.Length];
+        if (eyeScene is not null)
+        {
+            var eyes = eyeScene.Instantiate<Node2D>();
+            eyes.Set("color", new Color(GD.Randf(), GD.Randf(), GD.Randf()));
+            pawn.Eyes = eyes;
+        }
+
         // hat
         var coatScene = coats[GD.Randi() % coats.Length];
         if (coatScene is not null)
@@ -57,6 +66,14 @@ public partial class CharacterGenerationServer : GodotObject
         var surname = surnames[GD.RandRange(0, surnames.Count - 1)];
         return $"{CultureInfo.InvariantCulture.TextInfo.ToTitleCase(name)} {CultureInfo.InvariantCulture.TextInfo.ToTitleCase(surname)}";
     }
+
+    static readonly PackedScene[] eyes = [
+        GD.Load<PackedScene>("res://pawns/parts/eyes/eyes01.tscn"),
+        GD.Load<PackedScene>("res://pawns/parts/eyes/eyes02.tscn"),
+        GD.Load<PackedScene>("res://pawns/parts/eyes/eyes03.tscn"),
+        GD.Load<PackedScene>("res://pawns/parts/eyes/eyes04.tscn"),
+        GD.Load<PackedScene>("res://pawns/parts/eyes/eyes05.tscn"),
+        ];
 
     static readonly PackedScene[] bodies = [
         GD.Load<PackedScene>("res://pawns/parts/body/slim_body.tscn"),

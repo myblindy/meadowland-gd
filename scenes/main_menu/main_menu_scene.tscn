@@ -127,7 +127,7 @@ unique_name_in_owner = true
 layout_mode = 2
 selected = 2
 allow_reselect = true
-item_count = 4
+item_count = 5
 popup/item_0/text = "Small (200x200)"
 popup/item_0/id = 0
 popup/item_1/text = "Medium (300x300)"
@@ -136,6 +136,8 @@ popup/item_2/text = "Large (400x400)"
 popup/item_2/id = 2
 popup/item_3/text = "Gigantic (600x600)"
 popup/item_3/id = 3
+popup/item_4/text = "Ridiculous (1000x1000)"
+popup/item_4/id = 4
 
 [node name="Label2" type="Label" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer"]
 layout_mode = 2

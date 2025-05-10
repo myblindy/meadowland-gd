@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://djbprdyrrxnvk"]
+
+[ext_resource type="PackedScene" uid="uid://dynvauvbeh2yt" path="res://pawns/parts/eyes/base_eyes.tscn" id="1_3s54b"]
+[ext_resource type="Texture2D" uid="uid://cec7u55p0qnu1" path="res://pawns/parts/eyes/eyes02.svg" id="2_cesds"]
+
+[node name="BaseEyes" instance=ExtResource("1_3s54b")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_cesds")
