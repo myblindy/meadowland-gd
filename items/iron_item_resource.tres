@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameItemResource" load_steps=3 format=3 uid="uid://bhbbrwxu35ty0"]
+
+[ext_resource type="Script" uid="uid://dsrutk0n2h146" path="res://resources/game_item_resource.gd" id="2_tur80"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_unvto"]
+load_path = "res://.godot/imported/iron.png-f24dc9e32e22ea7925834ad60eb00c98.ctex"
+
+[resource]
+script = ExtResource("2_tur80")
+name = "Iron"
+icon_texture = SubResource("CompressedTexture2D_unvto")
+weight = 1.5
+pickup_speed_multiplier = 1.0
+placeable = false
+metadata/_custom_type_script = "uid://dsrutk0n2h146"

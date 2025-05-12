@@ -1,29 +1,102 @@
-[gd_resource type="Resource" script_class="GameBuildingResource" load_steps=8 format=3 uid="uid://dusb2jtrqne66"]
+[gd_resource type="Resource" script_class="GameBuildingResource" load_steps=21 format=3 uid="uid://dusb2jtrqne66"]
 
 [ext_resource type="Script" uid="uid://ckn2crkar0nw5" path="res://resources/game_building_resource.gd" id="1_c3eo6"]
 [ext_resource type="Script" uid="uid://bqxycrnvyhh13" path="res://resources/game_building_type_resource.gd" id="2_a5gqr"]
-[ext_resource type="Texture2D" uid="uid://q0ydsuqmmy07" path="res://textures/items/bed.png" id="3_xki8p"]
-[ext_resource type="Resource" uid="uid://d16v63tmyw83f" path="res://items/wood_item_resource.tres" id="4_dq718"]
+[ext_resource type="Script" uid="uid://dsrutk0n2h146" path="res://resources/game_item_resource.gd" id="2_xki8p"]
+[ext_resource type="Texture2D" uid="uid://q0ydsuqmmy07" path="res://buildings/bed.png" id="4_a5gqr"]
 [ext_resource type="Script" uid="uid://16rvp5xx1kty" path="res://resources/game_resource_quantity_resource.gd" id="5_qb5lp"]
 
-[sub_resource type="Resource" id="Resource_a5gqr"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dq718"]
+load_path = "res://.godot/imported/wood.png-3a8ec01cc1bf9a9d49a45aadeb223d81.ctex"
+
+[sub_resource type="Resource" id="Resource_qb5lp"]
+script = ExtResource("2_xki8p")
+name = "Wood"
+icon_texture = SubResource("CompressedTexture2D_dq718")
+weight = 2.0
+pickup_speed_multiplier = 1.0
+placeable = false
+metadata/_custom_type_script = "uid://dsrutk0n2h146"
+
+[sub_resource type="Resource" id="Resource_ksarl"]
 script = ExtResource("5_qb5lp")
-resource = ExtResource("4_dq718")
+resource = SubResource("Resource_qb5lp")
 quantity = 45.0
 metadata/_custom_type_script = "uid://16rvp5xx1kty"
 
-[sub_resource type="Resource" id="Resource_xki8p"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6atgt"]
+load_path = "res://.godot/imported/bed.png-4b35b7db6bee4171fcdd295beb3da9d5.ctex"
+
+[sub_resource type="Resource" id="Resource_6xjkw"]
 script = ExtResource("2_a5gqr")
-material_cost = SubResource("Resource_a5gqr")
+material_cost = SubResource("Resource_ksarl")
 building_time = 8.0
 hp = 90.0
-icon_texture = ExtResource("3_xki8p")
-sprite_texture = ExtResource("3_xki8p")
+sprite_texture = SubResource("CompressedTexture2D_6atgt")
+metadata/_custom_type_script = "uid://bqxycrnvyhh13"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kgjnn"]
+load_path = "res://.godot/imported/stone.png-93e2772359ff08b7121193d0e3e00918.ctex"
+
+[sub_resource type="Resource" id="Resource_ylsvc"]
+script = ExtResource("2_xki8p")
+name = "Stone"
+icon_texture = SubResource("CompressedTexture2D_kgjnn")
+weight = 3.0
+pickup_speed_multiplier = 5.0
+placeable = false
+metadata/_custom_type_script = "uid://dsrutk0n2h146"
+
+[sub_resource type="Resource" id="Resource_0iqou"]
+script = ExtResource("5_qb5lp")
+resource = SubResource("Resource_ylsvc")
+quantity = 45.0
+metadata/_custom_type_script = "uid://16rvp5xx1kty"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cqj3h"]
+load_path = "res://.godot/imported/bed.png-4b35b7db6bee4171fcdd295beb3da9d5.ctex"
+
+[sub_resource type="Resource" id="Resource_75v64"]
+script = ExtResource("2_a5gqr")
+material_cost = SubResource("Resource_0iqou")
+building_time = 16.0
+hp = 180.0
+sprite_texture = SubResource("CompressedTexture2D_cqj3h")
+metadata/_custom_type_script = "uid://bqxycrnvyhh13"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t8f2p"]
+load_path = "res://.godot/imported/iron.png-f24dc9e32e22ea7925834ad60eb00c98.ctex"
+
+[sub_resource type="Resource" id="Resource_4gb4k"]
+script = ExtResource("2_xki8p")
+name = "Iron"
+icon_texture = SubResource("CompressedTexture2D_t8f2p")
+weight = 1.5
+pickup_speed_multiplier = 1.0
+placeable = false
+metadata/_custom_type_script = "uid://dsrutk0n2h146"
+
+[sub_resource type="Resource" id="Resource_5iemx"]
+script = ExtResource("5_qb5lp")
+resource = SubResource("Resource_4gb4k")
+quantity = 45.0
+metadata/_custom_type_script = "uid://16rvp5xx1kty"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0r4lo"]
+load_path = "res://.godot/imported/bed.png-4b35b7db6bee4171fcdd295beb3da9d5.ctex"
+
+[sub_resource type="Resource" id="Resource_m1cr8"]
+script = ExtResource("2_a5gqr")
+material_cost = SubResource("Resource_5iemx")
+building_time = 8.0
+hp = 130.0
+sprite_texture = SubResource("CompressedTexture2D_0r4lo")
 metadata/_custom_type_script = "uid://bqxycrnvyhh13"
 
 [resource]
 script = ExtResource("1_c3eo6")
 name = "Bed"
 building_type = 0
-cost_types = Array[ExtResource("2_a5gqr")]([SubResource("Resource_xki8p")])
+icon_texture = ExtResource("4_a5gqr")
+cost_types = Array[ExtResource("2_a5gqr")]([SubResource("Resource_6xjkw"), SubResource("Resource_75v64"), SubResource("Resource_m1cr8")])
 metadata/_custom_type_script = "uid://ckn2crkar0nw5"

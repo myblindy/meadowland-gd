@@ -191,6 +191,20 @@ script = ExtResource("11_a1617")
 command_bar = NodePath("../../BuildingsBar")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
+[node name="OverlayBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
+layout_mode = 2
+text = "Overlays"
+script = ExtResource("11_a1617")
+command_bar = NodePath("../../OverlaysBar")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="GraphsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
+layout_mode = 2
+text = "Graphs"
+script = ExtResource("11_a1617")
+command_bar = NodePath("../../GraphsBar")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
 [node name="OrdersBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
 layout_mode = 2
 script = ExtResource("10_3mcv8")
@@ -213,6 +227,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2twt")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="OverlaysBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("10_3mcv8")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="GraphsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("10_3mcv8")
 metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
 [node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer"]
