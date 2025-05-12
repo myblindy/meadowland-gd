@@ -151,6 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 color = Color(1, 1, 1, 0)
 script = ExtResource("6_c16ls")
 
@@ -172,6 +173,7 @@ theme_override_constants/margin_bottom = 5
 [node name="CommandBarManager" parent="UICanvasLayer/MarginContainer" instance=ExtResource("9_w4lj1")]
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 0
 
 [node name="ActionsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
 layout_mode = 2
@@ -180,12 +182,14 @@ metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
 [node name="OrdersBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar"]
 layout_mode = 2
+mouse_filter = 1
 text = "Orders"
 script = ExtResource("11_a1617")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
 [node name="BuildingsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
 layout_mode = 2
+mouse_filter = 1
 text = "Buildings"
 script = ExtResource("11_a1617")
 command_bar = NodePath("../../BuildingsBar")
@@ -193,6 +197,7 @@ metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
 [node name="OverlayBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
 layout_mode = 2
+mouse_filter = 1
 text = "Overlays"
 script = ExtResource("11_a1617")
 command_bar = NodePath("../../OverlaysBar")
@@ -200,6 +205,7 @@ metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
 [node name="GraphsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
 layout_mode = 2
+mouse_filter = 1
 text = "Graphs"
 script = ExtResource("11_a1617")
 command_bar = NodePath("../../GraphsBar")
@@ -212,12 +218,14 @@ metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
 [node name="CommandBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/OrdersBar"]
 layout_mode = 2
+mouse_filter = 1
 text = "Mine"
 script = ExtResource("11_a1617")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
 [node name="CommandBarButton2" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/OrdersBar"]
 layout_mode = 2
+mouse_filter = 1
 text = "Chop"
 script = ExtResource("11_a1617")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"

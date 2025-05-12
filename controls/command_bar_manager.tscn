@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://3yqptbg6r2s5"]
+[gd_scene load_steps=3 format=3 uid="uid://3yqptbg6r2s5"]
 
 [ext_resource type="Script" uid="uid://bmvemeaihlxub" path="res://controls/command_bar_manager.gd" id="1_chuvb"]
+[ext_resource type="Texture2D" uid="uid://cysvh86ko72pj" path="res://controls/separator_arrow.png" id="2_5xjc0"]
 
 [node name="CommandBarManager" type="HBoxContainer"]
 anchors_preset = 12
@@ -15,6 +16,18 @@ script = ExtResource("1_chuvb")
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="SeparatorImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("2_5xjc0")
+expand_mode = 3
+
 [node name="CurrentBarContainer" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
+
+[connection signal="mouse_entered" from="SelectedButtonsContainer" to="." method="_on_selected_buttons_container_mouse_entered"]
+[connection signal="mouse_exited" from="SelectedButtonsContainer" to="." method="_on_selected_buttons_container_mouse_exited"]
+[connection signal="mouse_entered" from="CurrentBarContainer" to="." method="_on_current_bar_container_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentBarContainer" to="." method="_on_current_bar_container_mouse_exited"]
