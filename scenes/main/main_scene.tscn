@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://6j8fy1frgkdh"]
+[gd_scene load_steps=24 format=3 uid="uid://6j8fy1frgkdh"]
 
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main/main_scene_build_panel.gd" id="1_w2twt"]
@@ -9,6 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://br25fin25r34a" path="res://sounds/light-rain.mp3" id="6_18nlu"]
 [ext_resource type="Script" uid="uid://cctresaqip7vx" path="res://scenes/main/main_scene_lightning_rect.gd" id="6_c16ls"]
 [ext_resource type="AudioStream" uid="uid://cs0l82t8ftu1u" path="res://sounds/wind.mp3" id="7_c1pb6"]
+[ext_resource type="PackedScene" uid="uid://3yqptbg6r2s5" path="res://controls/command_bar_manager.tscn" id="9_w4lj1"]
+[ext_resource type="Script" uid="uid://bvcbfwlm4eaef" path="res://controls/command_bar.gd" id="10_3mcv8"]
+[ext_resource type="Script" uid="uid://bm1cpjj0iuxcy" path="res://controls/command_bar_button.gd" id="11_a1617"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18nlu"]
 shader = ExtResource("3_rt2n2")
@@ -156,18 +159,61 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 10
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="BuildPanel" type="HBoxContainer" parent="UICanvasLayer/MarginContainer"]
+[node name="CommandBarManager" parent="UICanvasLayer/MarginContainer" instance=ExtResource("9_w4lj1")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ActionsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("10_3mcv8")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="OrdersBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar"]
+layout_mode = 2
+text = "Orders"
+script = ExtResource("11_a1617")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="BuildingsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
+layout_mode = 2
+text = "Buildings"
+script = ExtResource("11_a1617")
+command_bar = NodePath("../../BuildingsBar")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="OrdersBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("10_3mcv8")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="CommandBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/OrdersBar"]
+layout_mode = 2
+text = "Mine"
+script = ExtResource("11_a1617")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="CommandBarButton2" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/OrdersBar"]
+layout_mode = 2
+text = "Chop"
+script = ExtResource("11_a1617")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="BuildingsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w2twt")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
 [node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer"]
 anchors_preset = 1

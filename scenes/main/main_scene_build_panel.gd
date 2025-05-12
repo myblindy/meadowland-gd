@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends CommandBar
 
 func _ready() -> void:
 

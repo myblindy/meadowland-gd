@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://3yqptbg6r2s5"]
+
+[ext_resource type="Script" uid="uid://bmvemeaihlxub" path="res://controls/command_bar_manager.gd" id="1_chuvb"]
+
+[node name="CommandBarManager" type="HBoxContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_chuvb")
+
+[node name="SelectedButtonsContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CurrentBarContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
