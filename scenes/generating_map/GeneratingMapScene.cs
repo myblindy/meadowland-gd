@@ -1,5 +1,4 @@
 using Godot;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 public partial class GeneratingMapScene : Node2D

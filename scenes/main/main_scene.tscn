@@ -1,7 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://6j8fy1frgkdh"]
+[gd_scene load_steps=25 format=3 uid="uid://6j8fy1frgkdh"]
 
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main/main_scene.gd" id="1_pw63i"]
-[ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main/main_scene_build_panel.gd" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main/main_scene_buildings_bar.gd" id="1_w2twt"]
 [ext_resource type="TileSet" uid="uid://ccj0cetq68ngx" path="res://resources/game_mining_tileset_resource.tres" id="2_pu3yx"]
 [ext_resource type="Script" uid="uid://domuhsksyf45b" path="res://scenes/main/main_scene_camera.gd" id="3_7ykc4"]
 [ext_resource type="Shader" uid="uid://b6xuoksvhikww" path="res://textures/shaders/tree_sway_shader.gdshader" id="3_rt2n2"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://3yqptbg6r2s5" path="res://controls/command_bar_manager.tscn" id="9_w4lj1"]
 [ext_resource type="Script" uid="uid://bvcbfwlm4eaef" path="res://controls/command_bar.gd" id="10_3mcv8"]
 [ext_resource type="Script" uid="uid://bm1cpjj0iuxcy" path="res://controls/command_bar_button.gd" id="11_a1617"]
+[ext_resource type="Script" uid="uid://bnvfb6x5xgah8" path="res://scenes/main/main_scene_floors_bar.gd" id="13_a1617"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18nlu"]
 shader = ExtResource("3_rt2n2")
@@ -180,11 +181,19 @@ layout_mode = 2
 script = ExtResource("10_3mcv8")
 metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
-[node name="OrdersBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar"]
+[node name="OrdersBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
 layout_mode = 2
 mouse_filter = 1
 text = "Orders"
 script = ExtResource("11_a1617")
+command_bar = NodePath("../../OrdersBar")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="ArchitectureBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
+layout_mode = 2
+text = "Architecture"
+script = ExtResource("11_a1617")
+command_bar = NodePath("../../ArchitectureBar")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
 [node name="BuildingsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ActionsBar" node_paths=PackedStringArray("command_bar")]
@@ -230,6 +239,18 @@ text = "Chop"
 script = ExtResource("11_a1617")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
+[node name="CommandBarButton3" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/OrdersBar"]
+layout_mode = 2
+text = "Hunt"
+script = ExtResource("11_a1617")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="CommandBarButton4" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/OrdersBar"]
+layout_mode = 2
+text = "Harvest"
+script = ExtResource("11_a1617")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
 [node name="BuildingsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -245,6 +266,29 @@ metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 [node name="GraphsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
 layout_mode = 2
 script = ExtResource("10_3mcv8")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="ArchitectureBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("10_3mcv8")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="WallsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ArchitectureBar"]
+layout_mode = 2
+text = "Walls"
+script = ExtResource("11_a1617")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="FloorsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ArchitectureBar" node_paths=PackedStringArray("command_bar")]
+layout_mode = 2
+text = "Floors"
+script = ExtResource("11_a1617")
+command_bar = NodePath("../../FloorsBar")
+metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
+
+[node name="FloorsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("13_a1617")
 metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
 [node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer"]

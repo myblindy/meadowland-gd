@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Diagnostics;
 
 [GlobalClass]
 public partial class Pawn : Node2D

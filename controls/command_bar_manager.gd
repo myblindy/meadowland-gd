@@ -1,5 +1,10 @@
 class_name CommandBarManager extends Control
 
+@export_range(0, 10, 0.01) var fade_duration_sec := 0.25
+@export_range(0, 5, 0.01) var fade_delay_sec := 0.2
+@export_range(0, 1000, 0.1) var randomness_percentage := 30.0
+@export var fade_height_multiplier := 3.0
+
 @onready var _selected_buttons_container := %SelectedButtonsContainer
 @onready var _current_bar_container := %CurrentBarContainer
 @onready var _separator_image := %SeparatorImage
@@ -83,6 +88,40 @@ func _auto_separator():
 		_hide_separator()
 	else:
 		_show_separator_bar()
+
+func _get_random_fade_duration() -> float:
+	return randf_range(fade_duration_sec * (1 - randomness_percentage / 100), fade_duration_sec * (1 + randomness_percentage / 100))
+
+func _get_random_fade_delay() -> float:
+	return randf_range(fade_delay_sec * (1 - randomness_percentage / 100), fade_delay_sec * (1 + randomness_percentage / 100))
+
+func _fade_in_out_button(real_bar_button: CommandBarButton, fade_in: bool) -> Tween:
+	
+	# clone the button
+	var cloned_button: CommandBarButton = real_bar_button.duplicate()
+	cloned_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	cloned_button.modulate = Color(1, 1, 1, 0) if fade_in else Color(1, 1, 1, 1)
+	cloned_button.visible = true
+	get_parent().get_parent().add_child(cloned_button)
+
+	var original_position := _get_canvas_relative_position(real_bar_button)
+	var tween := create_tween().set_parallel().set_trans(Tween.TRANS_EXPO)
+
+	var this_fade_duration_sec := _get_random_fade_duration()
+	var this_delay_sec := _get_random_fade_delay()
+
+	if fade_in:
+		cloned_button.position = original_position - Vector2(0, real_bar_button.size.y * fade_height_multiplier)
+		tween.tween_property(cloned_button, "position", original_position, this_fade_duration_sec).set_delay(this_delay_sec)
+		tween.tween_property(cloned_button, "modulate", Color(1, 1, 1, 1), this_fade_duration_sec).set_delay(this_delay_sec)
+	else:
+		cloned_button.position = original_position
+		tween.tween_property(cloned_button, "position", original_position + Vector2(0, real_bar_button.size.y * fade_height_multiplier), this_fade_duration_sec).set_delay(this_delay_sec)
+		tween.tween_property(cloned_button, "modulate", Color(1, 1, 1, 0), this_fade_duration_sec).set_delay(this_delay_sec)
+
+	tween.tween_callback(cloned_button.queue_free)
+
+	return tween
 
 func _button_pressed(bar: CommandBar, button: CommandBarButton) -> void:
 	# clone the bar buttons
@@ -180,17 +219,8 @@ func _navigate_back(cloned_button: CommandBarButton, original_bar: CommandBar) -
 		if bar is CommandBar:
 			for button in bar.get_children():
 				if button is CommandBarButton:
-					cloned_button = button.duplicate()
-					cloned_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					var original_position := _get_canvas_relative_position(button)
-					var destination_position := original_position + Vector2(0, button.size.y * 3)
-					cloned_button.position = original_position 
-					cloned_button.modulate = Color(1, 1, 1, 1)
-					cloned_button.add_to_group(_temp_command_bar_button_group)
-					get_parent().get_parent().add_child(cloned_button)
-
-					tween.parallel().tween_property(cloned_button, "position", destination_position, 0.3)
-					tween.parallel().tween_property(cloned_button, "modulate", Color(1, 1, 1, 0), 0.3)
+					var sub_tween := _fade_in_out_button(button, false)
+					tween.parallel().tween_subtween(sub_tween)
 
 	while _current_bar_container.get_child_count():
 		_current_bar_container.remove_child(_current_bar_container.get_child(0))
@@ -212,17 +242,8 @@ func _navigate_back(cloned_button: CommandBarButton, original_bar: CommandBar) -
 	tween = create_tween().set_trans(Tween.TRANS_EXPO)
 	for original_bar_button in original_bar.get_children():
 		if original_bar_button is CommandBarButton:
-			var cloned_original_button := original_bar_button.duplicate()
-			cloned_original_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			var original_position := _get_canvas_relative_position(original_bar_button)
-			cloned_original_button.position = original_position - Vector2(0, original_bar_button.size.y * 3)
-			cloned_original_button.modulate = Color(1, 1, 1, 0)
-			cloned_original_button.add_to_group(_temp_command_bar_button_group)
-			get_parent().get_parent().add_child(cloned_original_button)
-			
-			tween.parallel().tween_property(cloned_original_button, "position", original_position, 0.3)
-			tween.parallel().tween_property(cloned_original_button, "modulate", Color(1, 1, 1, 1), 0.3)
-			
+			var sub_tween := _fade_in_out_button(original_bar_button, true)
+			tween.parallel().tween_subtween(sub_tween)
 	await tween.finished
 	
 	# fading is done, get rid of the cloned buttons and show the real bar
