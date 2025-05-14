@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://crmmmpx5yf3hc"]
+
+[sub_resource type="GDScript" id="GDScript_fbjp4"]
+
+[resource]
+script = SubResource("GDScript_fbjp4")

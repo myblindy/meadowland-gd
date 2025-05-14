@@ -95,7 +95,7 @@ func _get_random_fade_duration() -> float:
 func _get_random_fade_delay() -> float:
 	return randf_range(fade_delay_sec * (1 - randomness_percentage / 100), fade_delay_sec * (1 + randomness_percentage / 100))
 
-func _fade_in_out_button(real_bar_button: CommandBarButton, fade_in: bool) -> Tween:
+func _fade_in_out_button(real_bar_button: CommandBarButton, fade_in: bool, master_tween: Tween):
 	
 	# clone the button
 	var cloned_button: CommandBarButton = real_bar_button.duplicate()
@@ -105,23 +105,20 @@ func _fade_in_out_button(real_bar_button: CommandBarButton, fade_in: bool) -> Tw
 	get_parent().get_parent().add_child(cloned_button)
 
 	var original_position := _get_canvas_relative_position(real_bar_button)
-	var tween := create_tween().set_parallel().set_trans(Tween.TRANS_EXPO)
 
 	var this_fade_duration_sec := _get_random_fade_duration()
 	var this_delay_sec := _get_random_fade_delay()
 
 	if fade_in:
 		cloned_button.position = original_position - Vector2(0, real_bar_button.size.y * fade_height_multiplier)
-		tween.tween_property(cloned_button, "position", original_position, this_fade_duration_sec).set_delay(this_delay_sec)
-		tween.tween_property(cloned_button, "modulate", Color(1, 1, 1, 1), this_fade_duration_sec).set_delay(this_delay_sec)
+		master_tween.parallel().tween_property(cloned_button, "position", original_position, this_fade_duration_sec)
+		master_tween.parallel().tween_property(cloned_button, "modulate", Color(1, 1, 1, 1), this_fade_duration_sec)
 	else:
 		cloned_button.position = original_position
-		tween.tween_property(cloned_button, "position", original_position + Vector2(0, real_bar_button.size.y * fade_height_multiplier), this_fade_duration_sec).set_delay(this_delay_sec)
-		tween.tween_property(cloned_button, "modulate", Color(1, 1, 1, 0), this_fade_duration_sec).set_delay(this_delay_sec)
+		master_tween.parallel().tween_property(cloned_button, "position", original_position + Vector2(0, real_bar_button.size.y * fade_height_multiplier), this_fade_duration_sec)
+		master_tween.parallel().tween_property(cloned_button, "modulate", Color(1, 1, 1, 0), this_fade_duration_sec)
 
-	tween.tween_callback(cloned_button.queue_free)
-
-	return tween
+	master_tween.finished.connect(cloned_button.queue_free)
 
 func _button_pressed(bar: CommandBar, button: CommandBarButton) -> void:
 	# clone the bar buttons
@@ -154,12 +151,12 @@ func _button_pressed(bar: CommandBar, button: CommandBarButton) -> void:
 		var tween := create_tween().set_trans(Tween.TRANS_EXPO)
 		for cloned_button in cloned_buttons:
 			if cloned_button != cloned_clicked_button:
-				tween.parallel().tween_property(cloned_button, "position", Vector2(cloned_button.position.x, get_viewport().size.y), 0.3)
+				tween.parallel().tween_property(cloned_button, "position", Vector2(cloned_button.position.x, get_viewport().size.y), _get_random_fade_duration())
 		await tween.finished
 
 	# step 2: slide the clicked button to the left
 	var tween_left := create_tween().set_trans(Tween.TRANS_EXPO)
-	tween_left.tween_property(cloned_clicked_button, "position", left_slide_destination, 0.3)
+	tween_left.tween_property(cloned_clicked_button, "position", left_slide_destination, _get_random_fade_duration())
 	await tween_left.finished
 
 	# step 2.1: free all cloned buttons
@@ -211,19 +208,20 @@ func _navigate_back(cloned_button: CommandBarButton, original_bar: CommandBar) -
 		var navigation_button := undo_navigation_buttons[navigation_button_idx]
 		get_parent().get_parent().add_child(navigation_button)
 		navigation_button.position = undo_navigation_buttons_dissolve_source[navigation_button_idx]
-		tween.parallel().tween_property(navigation_button, "position", undo_navigation_buttons_dissolve_destination[navigation_button_idx], 0.3)
-		tween.parallel().tween_property(navigation_button, "modulate", Color(1, 1, 1, 0), 0.3)
+		var fade_duration := _get_random_fade_duration()
+		tween.parallel().tween_property(navigation_button, "position", undo_navigation_buttons_dissolve_destination[navigation_button_idx], fade_duration)
+		tween.parallel().tween_property(navigation_button, "modulate", Color(1, 1, 1, 0), fade_duration)
 	
 	# fade out the current bar, if any
 	for bar in _current_bar_container.get_children():
 		if bar is CommandBar:
 			for button in bar.get_children():
 				if button is CommandBarButton:
-					var sub_tween := _fade_in_out_button(button, false)
-					tween.parallel().tween_subtween(sub_tween)
+					_fade_in_out_button(button, false, tween)
 
 	while _current_bar_container.get_child_count():
 		_current_bar_container.remove_child(_current_bar_container.get_child(0))
+	#return
 	await tween.finished
 	
 	# spacer goes bye bye
@@ -242,13 +240,12 @@ func _navigate_back(cloned_button: CommandBarButton, original_bar: CommandBar) -
 	tween = create_tween().set_trans(Tween.TRANS_EXPO)
 	for original_bar_button in original_bar.get_children():
 		if original_bar_button is CommandBarButton:
-			var sub_tween := _fade_in_out_button(original_bar_button, true)
-			tween.parallel().tween_subtween(sub_tween)
+			_fade_in_out_button(original_bar_button, true, tween)
 	await tween.finished
 	
 	# fading is done, get rid of the cloned buttons and show the real bar
-	get_tree().call_group(_temp_command_bar_button_group, "queue_free")
 	original_bar.modulate = Color(1, 1, 1, 1)
+	get_tree().call_group(_temp_command_bar_button_group, "queue_free")
 
 	await _auto_separator()
 

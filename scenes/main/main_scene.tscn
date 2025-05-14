@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://6j8fy1frgkdh"]
+[gd_scene load_steps=26 format=3 uid="uid://6j8fy1frgkdh"]
 
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main/main_scene_buildings_bar.gd" id="1_w2twt"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bvcbfwlm4eaef" path="res://controls/command_bar.gd" id="10_3mcv8"]
 [ext_resource type="Script" uid="uid://bm1cpjj0iuxcy" path="res://controls/command_bar_button.gd" id="11_a1617"]
 [ext_resource type="Script" uid="uid://bnvfb6x5xgah8" path="res://scenes/main/main_scene_floors_bar.gd" id="13_a1617"]
+[ext_resource type="Script" uid="uid://ry3pk30d2q2b" path="res://scenes/main/main_scene_walls_bar.gd" id="14_cf2is"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18nlu"]
 shader = ExtResource("3_rt2n2")
@@ -273,10 +274,11 @@ layout_mode = 2
 script = ExtResource("10_3mcv8")
 metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
-[node name="WallsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ArchitectureBar"]
+[node name="WallsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ArchitectureBar" node_paths=PackedStringArray("command_bar")]
 layout_mode = 2
 text = "Walls"
 script = ExtResource("11_a1617")
+command_bar = NodePath("../../WallsBar")
 metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 
 [node name="FloorsBarButton" type="Button" parent="UICanvasLayer/MarginContainer/CommandBarManager/ArchitectureBar" node_paths=PackedStringArray("command_bar")]
@@ -289,6 +291,11 @@ metadata/_custom_type_script = "uid://bm1cpjj0iuxcy"
 [node name="FloorsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
 layout_mode = 2
 script = ExtResource("13_a1617")
+metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
+
+[node name="WallsBar" type="HBoxContainer" parent="UICanvasLayer/MarginContainer/CommandBarManager"]
+layout_mode = 2
+script = ExtResource("14_cf2is")
 metadata/_custom_type_script = "uid://bvcbfwlm4eaef"
 
 [node name="PanelContainer" type="PanelContainer" parent="UICanvasLayer"]

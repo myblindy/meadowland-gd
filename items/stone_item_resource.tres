@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameItemResource" load_steps=3 format=3 uid="uid://dnyc6w4l1ty4w"]
+[gd_resource type="Resource" script_class="GameItemResource" load_steps=3 format=3 uid="uid://2ohjavuck2ce"]
 
 [ext_resource type="Script" uid="uid://dsrutk0n2h146" path="res://resources/game_item_resource.gd" id="1_ekyif"]
 
