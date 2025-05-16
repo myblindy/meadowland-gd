@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameItemResource" load_steps=3 format=3 uid="uid://2ohjavuck2ce"]
+
+[ext_resource type="Script" uid="uid://dsrutk0n2h146" path="res://resources/game_item_resource.gd" id="1_ekyif"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ekyif"]
+load_path = "res://.godot/imported/stone.png-93e2772359ff08b7121193d0e3e00918.ctex"
+
+[resource]
+script = ExtResource("1_ekyif")
+name = "Stone"
+icon_texture = SubResource("CompressedTexture2D_ekyif")
+weight = 3.0
+pickup_speed_multiplier = 5.0
+placeable = false
+metadata/_custom_type_script = "uid://dsrutk0n2h146"

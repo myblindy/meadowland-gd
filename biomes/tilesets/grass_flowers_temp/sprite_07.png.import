@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkgf08vcxgdqq"
-path="res://.godot/imported/wood.png-adda4b8415356bf3863c91c7d7704020.ctex"
+uid="uid://dd2s0gslato45"
+path="res://.godot/imported/sprite_07.png-9b202381cb483267eb6ab856aecde709.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/items/wood.png"
-dest_files=["res://.godot/imported/wood.png-adda4b8415356bf3863c91c7d7704020.ctex"]
+source_file="res://biomes/tilesets/grass_flowers_temp/sprite_07.png"
+dest_files=["res://.godot/imported/sprite_07.png-9b202381cb483267eb6ab856aecde709.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

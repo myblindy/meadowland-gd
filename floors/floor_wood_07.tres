@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameFloorResource" load_steps=3 format=3 uid="uid://22qnmfss58x5"]
+
+[ext_resource type="Script" uid="uid://dlifxqop31tmd" path="res://resources/game_floor_resource.gd" id="1_u2ot5"]
+[ext_resource type="Texture2D" uid="uid://b5a4lnphwpm73" path="res://floors/floor_wood_07.png" id="2_rdfor"]
+
+[resource]
+script = ExtResource("1_u2ot5")
+sprite_texture = ExtResource("2_rdfor")
+metadata/_custom_type_script = "uid://dlifxqop31tmd"

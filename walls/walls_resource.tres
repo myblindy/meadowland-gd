@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="GameWallsResource" load_steps=13 format=3 uid="uid://vryrk410prhw"]
+
+[ext_resource type="Script" uid="uid://dgdjfh336fsb5" path="res://resources/game_walls_resource.gd" id="1_teonn"]
+[ext_resource type="Script" uid="uid://bexlb0vec4jmi" path="res://resources/game_wall_resource.gd" id="2_r3smw"]
+[ext_resource type="Resource" path="res://items/iron_item_resource.tres" id="3_4bli4"]
+[ext_resource type="Script" uid="uid://16rvp5xx1kty" path="res://resources/game_resource_quantity_resource.gd" id="4_crrxd"]
+[ext_resource type="Resource" path="res://items/stone_item_resource.tres" id="5_j7qcd"]
+[ext_resource type="Resource" uid="uid://d16v63tmyw83f" path="res://items/wood_item_resource.tres" id="6_8t6gx"]
+
+[sub_resource type="Resource" id="Resource_iw3un"]
+script = ExtResource("4_crrxd")
+resource = ExtResource("3_4bli4")
+quantity = 25.0
+metadata/_custom_type_script = "uid://16rvp5xx1kty"
+
+[sub_resource type="Resource" id="Resource_4uu1d"]
+script = ExtResource("2_r3smw")
+cost = SubResource("Resource_iw3un")
+metadata/_custom_type_script = "uid://bexlb0vec4jmi"
+
+[sub_resource type="Resource" id="Resource_3bns6"]
+script = ExtResource("4_crrxd")
+resource = ExtResource("5_j7qcd")
+quantity = 25.0
+metadata/_custom_type_script = "uid://16rvp5xx1kty"
+
+[sub_resource type="Resource" id="Resource_ut1qr"]
+script = ExtResource("2_r3smw")
+cost = SubResource("Resource_3bns6")
+metadata/_custom_type_script = "uid://bexlb0vec4jmi"
+
+[sub_resource type="Resource" id="Resource_q5tcc"]
+script = ExtResource("4_crrxd")
+resource = ExtResource("6_8t6gx")
+quantity = 25.0
+metadata/_custom_type_script = "uid://16rvp5xx1kty"
+
+[sub_resource type="Resource" id="Resource_co71y"]
+script = ExtResource("2_r3smw")
+cost = SubResource("Resource_q5tcc")
+metadata/_custom_type_script = "uid://bexlb0vec4jmi"
+
+[resource]
+script = ExtResource("1_teonn")
+wall_types = Array[ExtResource("2_r3smw")]([SubResource("Resource_4uu1d"), SubResource("Resource_ut1qr"), SubResource("Resource_co71y")])
+metadata/_custom_type_script = "uid://dgdjfh336fsb5"

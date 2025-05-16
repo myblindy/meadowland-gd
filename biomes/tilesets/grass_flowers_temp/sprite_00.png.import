@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q0ydsuqmmy07"
-path="res://.godot/imported/bed.png-4ab39531698a1d2e181a66b878ecf936.ctex"
+uid="uid://g0teq6biylsq"
+path="res://.godot/imported/sprite_00.png-0006747fef3a8cf3be0e1f9cfd12fc7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/items/bed.png"
-dest_files=["res://.godot/imported/bed.png-4ab39531698a1d2e181a66b878ecf936.ctex"]
+source_file="res://biomes/tilesets/grass_flowers_temp/sprite_00.png"
+dest_files=["res://.godot/imported/sprite_00.png-0006747fef3a8cf3be0e1f9cfd12fc7d.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

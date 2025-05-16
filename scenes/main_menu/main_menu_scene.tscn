@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb2mc886kn2ut"]
+[gd_scene load_steps=9 format=3 uid="uid://bb2mc886kn2ut"]
 
 [ext_resource type="Script" uid="uid://2tt5cfwli31f" path="res://scenes/main_menu/main_menu_scene.gd" id="1_7hcs8"]
 [ext_resource type="Texture2D" uid="uid://c2stfd8pji0i2" path="res://textures/background/cloud01.svg" id="2_sb6w7"]
+[ext_resource type="Shader" uid="uid://dnygq3p2vm2r" path="res://scenes/main_menu/main_menu_scene_title_shader.tres" id="3_c05yd"]
 [ext_resource type="Texture2D" uid="uid://docj80vvitaio" path="res://textures/background/background.png" id="3_yj20m"]
 
 [sub_resource type="Gradient" id="Gradient_l6cm7"]
@@ -27,6 +28,9 @@ attractor_interaction_enabled = false
 scale_min = 0.2
 scale_max = 0.6
 turbulence_noise_strength = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_026m6"]
+shader = ExtResource("3_c05yd")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -56,6 +60,7 @@ visibility_rect = Rect2(-400.236, -837.146, 3109.43, 1590.84)
 process_material = SubResource("ParticleProcessMaterial_ekxnf")
 
 [node name="TitleRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_026m6")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
