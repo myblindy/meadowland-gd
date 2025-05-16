@@ -221,7 +221,6 @@ func _navigate_back(cloned_button: CommandBarButton, original_bar: CommandBar) -
 
 	while _current_bar_container.get_child_count():
 		_current_bar_container.remove_child(_current_bar_container.get_child(0))
-	#return
 	await tween.finished
 	
 	# spacer goes bye bye
