@@ -4,3 +4,18 @@
 
 [node name="Pawn" type="Node2D"]
 script = ExtResource("1_6xobo")
+
+[node name="OverlayRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 4096
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 20.3333
+grow_horizontal = 2
+horizontal_alignment = 1

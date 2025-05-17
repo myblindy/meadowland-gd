@@ -4,11 +4,19 @@ using Godot;
 public partial class Pawn : Node2D
 {
     public string? PawnName { get; set; }
+    public string? PawnNickName { get; set; }
+    public string? PawnSurname { get; set; }
     public bool IsMale { get; set; }
+
+    public string? PawnFullDisplayName => $"{PawnName}{(string.IsNullOrWhiteSpace(PawnNickName) ? null : $"\"{PawnName}\"")}{PawnSurname}";
+    public string? PawnShortDisplayName => string.IsNullOrWhiteSpace(PawnNickName) ? PawnName : PawnNickName;
+
+    Node2D? overlayRoot;
+    Label nameLabel = null!;
 
     public Node2D? Body
     {
-        get => GetChildCount() > 0 ? GetChild<Node2D>(0) : null;
+        get => overlayRoot?.GetChildCount() > 0 ? overlayRoot?.GetChild<Node2D>(0) : null;
         set
         {
             var oldValue = Body;
@@ -20,9 +28,9 @@ public partial class Pawn : Node2D
                 oldValue?.Set("coat", default);
                 oldValue?.Set("eyes", default);
 
-                while (GetChildCount() > 0)
-                    RemoveChild(GetChild(0));
-                AddChild(value);
+                while (overlayRoot?.GetChildCount() > 0)
+                    overlayRoot?.RemoveChild(overlayRoot?.GetChild(0));
+                overlayRoot?.AddChild(value);
 
                 value?.Set("eyes", eyes);
                 value?.Set("hat", hat);
@@ -49,10 +57,20 @@ public partial class Pawn : Node2D
         set => Body?.Set("coat", value);
     }
 
+    public override void _Ready()
+    {
+        overlayRoot = GetNode<Node2D>("%OverlayRoot");
+        nameLabel = GetNode<Label>("%Name");
+    }
+
     Vector2? lastRealPosition;
     Vector2? targetPosition;
     public override void _Process(double delta)
     {
+        nameLabel.Text = PawnShortDisplayName;
+        if (GetTree().GetFirstNodeInGroup("game_camera") is Camera2D { } camera)
+            nameLabel.Set("theme_override_font_sizes/font_size", 45 / camera.Zoom.X);
+
         lastRealPosition ??= Position;
 
         // idle AI

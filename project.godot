@@ -26,6 +26,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="meadowland-gd"
 
+[global_group]
+
+game_camera=""
+
 [gui]
 
 theme/custom="uid://wk5uio83oxq7"

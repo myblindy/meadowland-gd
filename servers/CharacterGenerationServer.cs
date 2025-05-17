@@ -6,7 +6,7 @@ using Godot;
 [GlobalClass]
 public partial class CharacterGenerationServer : GodotObject
 {
-    readonly List<string> surnames, maleNames, femaleNames;
+    readonly List<string> surnames, maleNames, femaleNames, nicknames;
 
     public static CharacterGenerationServer Instance { get; private set; } = null!;
     public CharacterGenerationServer()
@@ -14,16 +14,27 @@ public partial class CharacterGenerationServer : GodotObject
         Debug.Assert(Instance is null);
         Instance = this;
 
-        surnames = [.. FileAccess.GetFileAsString("res://names/surnames.txt").Split('\n')];
-        maleNames = [.. FileAccess.GetFileAsString("res://names/names_male.txt").Split('\n')];
-        femaleNames = [.. FileAccess.GetFileAsString("res://names/names_female.txt").Split('\n')];
+        surnames = [.. GetLineStrings("res://names/surnames.txt")];
+        maleNames = [.. GetLineStrings("res://names/names_male.txt")];
+        femaleNames = [.. GetLineStrings("res://names/names_female.txt")];
+        nicknames = [.. GetLineStrings("res://names/nicknames.txt")];
     }
 
-    public Pawn GenerateRandomPawn()
+    static IEnumerable<string> GetLineStrings(string resPath)
     {
-        var pawn = GD.Load<PackedScene>("res://pawns/pawn.tscn").Instantiate<Pawn>();
+        using var file = FileAccess.Open(resPath, FileAccess.ModeFlags.Read);
+        while (file.GetPosition() < file.GetLength())
+            if (file.GetLine() is { } line)
+                yield return line;
+    }
+
+    public void GenerateRandomPawn(Pawn pawn)
+    {
         pawn.IsMale = GD.Randi() % 2 == 0;
-        pawn.PawnName = GenerateRandomName(pawn.IsMale);
+
+        pawn.PawnName = CultureInfo.InvariantCulture.TextInfo.ToTitleCase((pawn.IsMale ? maleNames : femaleNames).PickRandom());
+        pawn.PawnNickName = GD.Randf() < 0.3f ? CultureInfo.InvariantCulture.TextInfo.ToTitleCase(nicknames.PickRandom()) : null;
+        pawn.PawnSurname = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(surnames.PickRandom());
 
         pawn.Body = bodies[GD.Randi() % bodies.Length].Instantiate<Node2D>();
 
@@ -56,15 +67,6 @@ public partial class CharacterGenerationServer : GodotObject
             hat.Set("color", new Color(GD.Randf(), GD.Randf(), GD.Randf()));
             pawn.Hat = hat;
         }
-
-        return pawn;
-    }
-
-    public string GenerateRandomName(bool isMale)
-    {
-        var name = isMale ? maleNames[GD.RandRange(0,  maleNames.Count - 1)] : femaleNames[GD.RandRange(0, femaleNames.Count - 1)];
-        var surname = surnames[GD.RandRange(0, surnames.Count - 1)];
-        return $"{CultureInfo.InvariantCulture.TextInfo.ToTitleCase(name)} {CultureInfo.InvariantCulture.TextInfo.ToTitleCase(surname)}";
     }
 
     static readonly PackedScene[] eyes = [

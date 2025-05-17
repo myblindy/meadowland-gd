@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bb2mc886kn2ut"]
+[gd_scene load_steps=10 format=3 uid="uid://bb2mc886kn2ut"]
 
 [ext_resource type="Script" uid="uid://2tt5cfwli31f" path="res://scenes/main_menu/main_menu_scene.gd" id="1_7hcs8"]
 [ext_resource type="Texture2D" uid="uid://c2stfd8pji0i2" path="res://textures/background/cloud01.svg" id="2_sb6w7"]
 [ext_resource type="Shader" uid="uid://dnygq3p2vm2r" path="res://scenes/main_menu/main_menu_scene_title_shader.tres" id="3_c05yd"]
 [ext_resource type="Texture2D" uid="uid://docj80vvitaio" path="res://textures/background/background.png" id="3_yj20m"]
+[ext_resource type="PackedScene" uid="uid://dqljo1p7006il" path="res://pawns/pawn.tscn" id="5_026m6"]
 
 [sub_resource type="Gradient" id="Gradient_l6cm7"]
 colors = PackedColorArray(0.72927, 0.815462, 0.987038, 1, 0.0203352, 0.719, 1, 1)
@@ -166,13 +167,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Control" type="Control" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer"]
+process_mode = 4
 custom_minimum_size = Vector2(100, 150)
 layout_mode = 2
 
-[node name="SpriteMarker1" type="Marker2D" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/Control"]
+[node name="Pawn1" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer/HBoxContainer/VBoxContainer/Control" instance=ExtResource("5_026m6")]
 unique_name_in_owner = true
-process_mode = 4
-position = Vector2(50, 139.585)
+position = Vector2(50, 140)
 
 [node name="CenterContainer" type="CenterContainer" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer/HBoxContainer"]
 layout_mode = 2
@@ -203,13 +204,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Control" type="Control" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer"]
+process_mode = 4
 custom_minimum_size = Vector2(100, 150)
 layout_mode = 2
 
-[node name="SpriteMarker2" type="Marker2D" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/Control"]
+[node name="Pawn2" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/Control" instance=ExtResource("5_026m6")]
 unique_name_in_owner = true
-process_mode = 4
-position = Vector2(50, 139.585)
+position = Vector2(50, 140)
 
 [node name="CenterContainer" type="CenterContainer" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2
@@ -240,13 +241,13 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Control" type="Control" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer3/HBoxContainer/VBoxContainer"]
+process_mode = 4
 custom_minimum_size = Vector2(100, 150)
 layout_mode = 2
 
-[node name="SpriteMarker3" type="Marker2D" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer3/HBoxContainer/VBoxContainer/Control"]
+[node name="Pawn3" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer3/HBoxContainer/VBoxContainer/Control" instance=ExtResource("5_026m6")]
 unique_name_in_owner = true
-process_mode = 4
-position = Vector2(50, 139.585)
+position = Vector2(50, 140)
 
 [node name="CenterContainer" type="CenterContainer" parent="NewGameContainer/MarginContainer/PanelContainer/InternalNewGameContainer/CenterContainer/HBoxContainer2/PanelContainer3/HBoxContainer"]
 layout_mode = 2

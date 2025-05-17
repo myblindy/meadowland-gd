@@ -107,7 +107,7 @@ func _fade_in_out_button(real_bar_button: CommandBarButton, fade_in: bool, maste
 	var original_position := _get_canvas_relative_position(real_bar_button)
 
 	var this_fade_duration_sec := _get_random_fade_duration()
-	var this_delay_sec := _get_random_fade_delay()
+	#var this_delay_sec := _get_random_fade_delay()
 
 	if fade_in:
 		cloned_button.position = original_position - Vector2(0, real_bar_button.size.y * fade_height_multiplier)

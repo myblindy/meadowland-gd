@@ -22,8 +22,8 @@ var _coat: BaseCoat
 		return _coat
 	set(value):
 		if value != _coat:
-			if _coat:
-				_coat.queue_free()
+			if _coat and _coat_root:
+				_coat_root.remove_child(_coat)
 			_coat = value
 			if _coat and _coat_root:
 				_coat_root.add_child(_coat)
@@ -34,8 +34,8 @@ var _hat: BaseHat
 		return _hat
 	set(value):
 		if value != _hat:
-			if _hat:
-				_hat.queue_free()
+			if _hat and _hat_root:
+				_hat_root.remove_child(_hat)
 			_hat = value
 			if _hat and _hat_root:
 				_hat_root.add_child(_hat)
@@ -46,8 +46,8 @@ var _eyes: BaseEyes
 		return _eyes
 	set(value):
 		if value != _eyes:
-			if _eyes:
-				_eyes.queue_free()
+			if _eyes and _face_root:
+				_face_root.remove_child(_eyes)
 			_eyes = value
 			if _eyes and _face_root:
 				_face_root.add_child(_eyes)
