@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://6j8fy1frgkdh"]
+[gd_scene load_steps=27 format=3 uid="uid://6j8fy1frgkdh"]
 
 [ext_resource type="Script" uid="uid://cdx15om08cfwl" path="res://scenes/main/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Script" uid="uid://d3ur7txp4q7fk" path="res://scenes/main/main_scene_buildings_bar.gd" id="1_w2twt"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bm1cpjj0iuxcy" path="res://controls/command_bar_button.gd" id="11_a1617"]
 [ext_resource type="Script" uid="uid://bnvfb6x5xgah8" path="res://scenes/main/main_scene_floors_bar.gd" id="13_a1617"]
 [ext_resource type="Script" uid="uid://ry3pk30d2q2b" path="res://scenes/main/main_scene_walls_bar.gd" id="14_cf2is"]
+[ext_resource type="PackedScene" uid="uid://drhcbpxsgsigd" path="res://scenes/tooltips/tooltip_frame.tscn" id="15_wlnme"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_18nlu"]
 shader = ExtResource("3_rt2n2")
@@ -330,6 +331,10 @@ text = "Windy Right"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Storm"
+
+[node name="TooltipFrame" parent="UICanvasLayer" instance=ExtResource("15_wlnme")]
+visible = false
+modulate = Color(1, 1, 1, 0)
 
 [connection signal="pressed" from="UICanvasLayer/PanelContainer/VBoxContainer/CalmWeatherButton" to="." method="_on_calm_weather_button_pressed"]
 [connection signal="pressed" from="UICanvasLayer/PanelContainer/VBoxContainer/WindyLeftButton" to="." method="_on_windy_left_button_pressed"]

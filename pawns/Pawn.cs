@@ -9,8 +9,10 @@ public partial class Pawn : Node2D
     public bool IsMale { get; set; }
 
     public string? PawnFullDisplayName => $"{PawnName}{(string.IsNullOrWhiteSpace(PawnNickName) ? null : $"\"{PawnName}\"")}{PawnSurname}";
+    public string? PawnFullDisplayNameWithoutNickName => $"{PawnName} {PawnSurname}";
     public string? PawnShortDisplayName => string.IsNullOrWhiteSpace(PawnNickName) ? PawnName : PawnNickName;
 
+    Resource globalState = GD.Load("res://servers/game_state_server.gd");
     Node2D? overlayRoot;
     Label nameLabel = null!;
 
@@ -28,8 +30,7 @@ public partial class Pawn : Node2D
                 oldValue?.Set("coat", default);
                 oldValue?.Set("eyes", default);
 
-                while (overlayRoot?.GetChildCount() > 0)
-                    overlayRoot?.RemoveChild(overlayRoot?.GetChild(0));
+                overlayRoot?.ClearChildren();
                 overlayRoot?.AddChild(value);
 
                 value?.Set("eyes", eyes);
@@ -61,6 +62,12 @@ public partial class Pawn : Node2D
     {
         overlayRoot = GetNode<Node2D>("%OverlayRoot");
         nameLabel = GetNode<Label>("%Name");
+
+        GetNode<Area2D>("%InteractArea2D").InputEvent += (viewport, @event, shapeIdx) =>
+        {
+            if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left, Pressed: true })
+                globalState.Set("current_selection", this);
+        };
     }
 
     Vector2? lastRealPosition;

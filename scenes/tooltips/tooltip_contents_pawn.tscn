@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyt73q8wmn3a8"]
+
+[ext_resource type="PackedScene" uid="uid://cuqg5yhr3gfs6" path="res://scenes/tooltips/tooltip_contents_base.tscn" id="1_626b6"]
+[ext_resource type="Script" uid="uid://cx72ygqhtd1e" path="res://scenes/tooltips/TooltipContentsPawn.cs" id="2_wpbp2"]
+
+[node name="TooltipContentsBase" instance=ExtResource("1_626b6")]
+script = ExtResource("2_wpbp2")
